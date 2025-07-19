@@ -32,11 +32,6 @@ class Contact(models.Model):
     email = models.EmailField(
         verbose_name='ایمیل'
     )
-    linkedin_id = models.CharField(
-        max_length=255,
-        blank=True,
-        verbose_name='شناسه لینکدین'
-    )
 
     status = models.CharField(
         max_length=3,
