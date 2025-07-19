@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third party libs
+    'rest_framework',
+    'corsheaders',
 
     # custom apps
     'Contacts.apps.ContactsConfig',
@@ -44,6 +46,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'Server.urls'
@@ -184,3 +189,10 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_animation_speed": 300,  # Speed of sidebar animations (in ms)
     "sidebar_nav_icon_style": "fa fa-fw",  # Icon style for the sidebar
 }
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
