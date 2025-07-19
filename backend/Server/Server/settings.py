@@ -36,6 +36,7 @@ INSTALLED_APPS = [
 
     # custom apps
     'Contacts.apps.ContactsConfig',
+    'Cliparts.apps.ClipartsConfig',
 ]
 
 MIDDLEWARE = [
