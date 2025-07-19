@@ -46,7 +46,6 @@ class ContactAdmin(admin.ModelAdmin):
         'l_name',
         'email',
         'phone',
-        'linkedin_id',
     )
 
     # Make these fields read-only in the detail/edit view
@@ -91,7 +90,6 @@ class ContactAdmin(admin.ModelAdmin):
                 'l_name',
                 'email',
                 'phone',
-                'linkedin_id',
             )
         }),
         ('وضعیت و مدیریت', {
