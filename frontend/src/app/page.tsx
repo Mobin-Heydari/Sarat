@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Slider } from "@/components/ui/3DSlider";
 
 import { slideData } from "@/data";
+import { ContactForm } from "@/components/ContactForm";
 
 
 
@@ -15,6 +16,7 @@ export default function Home() {
         <p className="text-lg text-wrap text-right text-main-text-light dark:text-main-text-dark mb-3 p-3">توضبحات مختصر و مفید.</p>
         <Slider slides={slideData} />
       </section>
+      <ContactForm />
     </main>
   );
 }
