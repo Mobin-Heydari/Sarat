@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Theme from "@/providers/ThemeProvider";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 
 
@@ -22,6 +23,7 @@ export default async function RootLayout({
         <Theme>
           <Navbar />
           {children}
+          <Footer />
         </Theme>
       </body>
     </html>
