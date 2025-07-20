@@ -44,7 +44,7 @@ export const FloatingNav = ({
         animate={{ y: visible ? 0 : -100, opacity: visible ? 1 : 0 }}
         transition={{ duration: 0.2 }}
         className={cn(
-          "fixed top-10 inset-x-0 mx-auto flex max-w-fit items-center gap-5 rounded-3xl border-primary-dark bg-base px-10 py-5 shadow-lg z-[5000]",
+          "fixed top-10 inset-x-0 mx-auto flex max-w-fit items-center gap-5 rounded-3xl border-primary-dark bg-base px-10 py-5 shadow-lg z-[5000] bg-base-light dark:bg-base-dark",
           className
         )}
       >
@@ -57,8 +57,8 @@ export const FloatingNav = ({
               href={item.href}
               aria-current={isActive ? "page" : undefined}
               className={cn(
-                "flex items-center space-x-1 text-neutral-600 hover:text-neutral-500 dark:text-neutral-50 dark:hover:text-neutral-300",
-                isActive && "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                "flex items-center space-x-1 text-main-text-light hover:text-main-text-light/[0.7] dark:text-main-text-dark dark:hover:text-main-text-dark/[0.5]",
+                isActive && "border-b-2 border-primary-light dark:border-primary-dark text-primary-light dark:text-primary-dark"
               )}
             >
               <span className="block sm:hidden">{item.icon}</span>
