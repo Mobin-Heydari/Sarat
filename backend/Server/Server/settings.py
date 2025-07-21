@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     # Third party libs
     'rest_framework',
     'corsheaders',
+    'ckeditor',
+    'ckeditor_uploader',
 
     # custom apps
     'Contacts.apps.ContactsConfig',
@@ -197,3 +199,14 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+# Ckeditor settings
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}
