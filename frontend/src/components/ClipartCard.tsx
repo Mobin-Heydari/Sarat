@@ -11,7 +11,7 @@ import { Clipart } from "@/types/clipart";
 
 
 
-export default async function ClipartCard(item: Clipart) {
+export default function ClipartCard(item: Clipart) {
 
     const router = useRouter();
     
