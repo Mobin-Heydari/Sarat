@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Contacts.apps.ContactsConfig',
     'Cliparts.apps.ClipartsConfig',
     'Stories.apps.StoriesConfig',
+    'Audios.apps.AudiosConfig',
 ]
 
 MIDDLEWARE = [
