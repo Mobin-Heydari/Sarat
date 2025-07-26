@@ -11,4 +11,5 @@ urlpatterns = [
     path('contacts/', include('Contacts.urls', namespace="Contacts")),
     path('cliparts/', include('Cliparts.urls', namespace="Cliparts")),
     path('stories/', include('Stories.urls', namespace="Stories")),
+    path('audios/', include('Audios.urls', namespace="Audios")),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
