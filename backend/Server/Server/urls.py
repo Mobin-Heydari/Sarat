@@ -10,4 +10,5 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('contacts/', include('Contacts.urls', namespace="Contacts")),
     path('cliparts/', include('Cliparts.urls', namespace="Cliparts")),
+    path('stories/', include('Stories.urls', namespace="Stories")),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
