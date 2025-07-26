@@ -16,6 +16,14 @@ class Story(models.Model):
     created_at = models.DateTimeField(verbose_name="تاریخ ایجاد", auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="تاریخ بهروزرسانی", auto_now=True)
 
+    class Meta:
+        verbose_name = "استوری"
+        verbose_name_plural = "استوری ها"
+
+    def str(self):
+        return self.title
+    
+
 
 
 class StoryVideos(models.Model):
@@ -27,7 +35,18 @@ class StoryVideos(models.Model):
         verbose_name="استوری"
     )
 
+    title = models.CharField(verbose_name="عنوان", max_length=250)
+    slug = models.SlugField(verbose_name="اسلاگ", max_length=250, unique=True, primary_key=True)
+
     video = models.FileField(verbose_name="ویدیو", upload_to="stories/posters")
 
     created_at = models.DateTimeField(verbose_name="تاریخ ایجاد", auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="تاریخ بهروزرسانی", auto_now=True)
+
+    class Meta:
+        verbose_name = "ویدیو"
+        verbose_name_plural = "ویدیو های استوری"
+    
+
+    def str(self):
+        return self.title
