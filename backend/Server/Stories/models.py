@@ -38,7 +38,7 @@ class StoryVideos(models.Model):
     title = models.CharField(verbose_name="عنوان", max_length=250)
     slug = models.SlugField(verbose_name="اسلاگ", max_length=250, unique=True, primary_key=True)
 
-    video = models.FileField(verbose_name="ویدیو", upload_to="stories/posters")
+    video = models.URLField(verbose_name="آدرس ویدیو")
 
     created_at = models.DateTimeField(verbose_name="تاریخ ایجاد", auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="تاریخ بهروزرسانی", auto_now=True)
