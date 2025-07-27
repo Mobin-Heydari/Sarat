@@ -19,5 +19,5 @@ export interface Story {
     created_at: string;
     updated_at: string;
 
-    video: StoryVideo[]
+    videos: StoryVideo[]
 }
