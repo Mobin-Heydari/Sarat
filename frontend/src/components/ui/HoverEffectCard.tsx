@@ -23,7 +23,7 @@ export const HoverEffectCards = ({
       )}
     >
       {items.map((item, idx) => (
-        <Link key={item.slug} href={`/music/${item.slug}`}>
+        <Link key={item.slug} href={`/musics/${item.slug}`}>
           <motion.div
             className="relative group block h-full w-full p-2 cursor-pointer"
             onMouseEnter={() => setHoveredIndex(idx)}
