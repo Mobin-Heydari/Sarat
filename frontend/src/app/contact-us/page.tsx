@@ -11,7 +11,7 @@ import HeroSection from "@/components/HeroSection";
 
 export default function ContactUs() {
   return (
-    <main className="flex flex-col justify-between gap-16 h-auto w-full p-12">
+    <main className="flex flex-col justify-between gap-6 h-auto w-full p-12">
       {/* Hero */}
       <HeroSection
         title="تماس با ما"
