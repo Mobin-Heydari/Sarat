@@ -29,7 +29,7 @@ const HeroSection = ({
   buttonClasses?: string;
 }) => {
   return (
-    <section className="relative pb-5 pt-12">
+    <section className="relative pb-5">
       <div
         className="h-full w-auto bg-base-light dark:bg-base-dark bg-grid-base-dark/[0.03] bg-grid-base-dark-100/[0.2] 
            absolute top-0 left-0 flex items-center justify-center"
@@ -39,7 +39,7 @@ const HeroSection = ({
         />
       </div>
 
-      <div className="flex justify-center relative my-20 z-10">
+      <div className="flex justify-center relative my-5 z-10">
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
           <p className="uppercase tracking-widest text-xs text-center text-main-text-light dark:text-main-text-dark max-w-80">{ title }</p>
           <TextGenerateEffect
