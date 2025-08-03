@@ -123,7 +123,7 @@ export function ContactForm() {
   };
 
   return (
-    <section className="shadow-input mx-auto mb-20 w-full max-w-lg border border-primary-light dark:border-primary-dark rounded-xl p-4 md:rounded-2xl md:p-8 bg-base-light/[0.5] dark:bg-base-dark/[0.5]">
+    <section className="shadow-input mx-auto  w-full max-w-lg border border-primary-light dark:border-primary-dark rounded-xl p-4 md:rounded-2xl md:p-8 bg-base-light/[0.5] dark:bg-base-dark/[0.5]">
       <h2 className="text-xl font-bold text-main-text-light dark:text-main-text-dark text-center mb-4">فرم تماس با ما</h2>
       <p className="mt-2 max-w-sm text-sm text-main-text-light dark:text-main-text-dark mb-4">
         شما می توانید با پر کردن فرم تماس با ما درخواست ها و نظرات خود را با ما به اشتراک بگذارید.
