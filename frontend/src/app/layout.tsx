@@ -19,7 +19,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
-      <body className="dark:bg-base-dark bg-base-light font-custom flex flex-col justify-between gap-9">
+      <body className="dark:bg-base-dark bg-base-light font-custom flex flex-col justify-between gap-6">
         <Theme>
           <Navbar />
           {children}
