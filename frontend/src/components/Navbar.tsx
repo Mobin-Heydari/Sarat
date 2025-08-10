@@ -19,7 +19,7 @@ export default function Navbar() {
         { name: "نماهنگ ", href: "/cliparts", icon: <FaPhotoFilm /> },
         { name: "استوری", href: "/stories", icon: <FaInstalod  /> },
         { name: "صوت", href: "/musics", icon: <FaPlay /> },
-        { name: "بامزه ها", href: "/funnies", icon: <FaSmileBeam /> },
+        // { name: "بامزه ها", href: "/funnies", icon: <FaSmileBeam /> },
         { name: "تماس باما", href: "/contact-us", icon: <FaPhoneFlip /> },
   ]
 
