@@ -1,13 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 
-from . import views
-
+from .routers import AudioRouter
 
 
 app_name = "Audios"
 
+audios_router = AudioRouter()
 
 urlpatterns = [
-    path('list/', views.AudiosListApiView.as_view()),
-    path('detail/<slug:slug>/', views.AudioDetailApiView.as_view()),
+    path('', include(audios_router.get_urls())),
 ]
