@@ -6,6 +6,7 @@ import { Label } from "./ui/Label";
 import { FileUpload } from "./ui/FileUpload";
 import { cn } from "@/lib/utils";
 import { Textarea } from "./ui/Textarea";
+import { FaPhoneAlt } from "react-icons/fa";
 
 
 
@@ -123,12 +124,25 @@ export function ContactForm() {
   };
 
   return (
-    <section className="shadow-input mx-auto  w-full max-w-lg border border-primary-light dark:border-primary-dark rounded-xl p-4 md:rounded-2xl md:p-8 bg-base-light/[0.5] dark:bg-base-dark/[0.5]">
-      <h2 className="text-xl font-bold text-main-text-light dark:text-main-text-dark text-center mb-4">فرم تماس با ما</h2>
-      <p className="mt-2 max-w-sm text-sm text-main-text-light dark:text-main-text-dark mb-4">
-        شما می توانید با پر کردن فرم تماس با ما درخواست ها و نظرات خود را با ما به اشتراک بگذارید.
-      </p>
+    <div className="flex flex-col justify-center gap-5 shadow-input mx-auto  w-full max-w-lg border border-primary-light dark:border-primary-dark rounded-xl p-4 md:rounded-2xl md:p-8 bg-base-light/[0.5] dark:bg-base-dark/[0.5]">
+      <div className="flex flex-col justify-center gap-6">
+        <div className="flex flex-col justify-between gap-3">
+          <h4 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark text-center">اطلاعات تماس</h4>
+          <p className="text-sm text-main-text-light dark:text-main-text-dark">
+            شما می توانید با پر کردن فرم تماس با ما درخواست ها و نظرات خود را با ما به اشتراک بگذارید.
+          </p>
+        </div>
 
+        <div className="flex justify-start items-center gap-4">
+          <FaPhoneAlt className="text-3xl text-primary-light dark:text-primary-dark"/>
+          <div className="flex justify-between flex-col gap-1">
+            <span className="text-lg font-bold text-main-text-light dark:text-main-text-dark">تلفن:</span>
+            <p className="text-sm text-main-text-light/[0.7] dark:text-main-text-dark/[0.7]">
+              0912-000-0000
+            </p>
+          </div>
+        </div>
+      </div>
       <form className="my-8" onSubmit={handleSubmit}>
         {/* First Name & Last Name */}
         <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
@@ -185,7 +199,7 @@ export function ContactForm() {
           <BottomGradient />
         </button>
       </form>
-    </section>
+    </div>
   );
 }
 
