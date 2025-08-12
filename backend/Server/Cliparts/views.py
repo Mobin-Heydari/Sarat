@@ -1,28 +1,35 @@
 from django.shortcuts import get_object_or_404
 
-from rest_framework.views import Response, APIView
+from rest_framework.views import Response
+from rest_framework.viewsets import ViewSet
 from rest_framework import status
 
-from .models import Clipart
 from .serializers import ClipartSerializer
+from .models import Clipart
 
 
 
+class ClipartViewSet(ViewSet):
+    lookup_field = 'slug'
 
-
-class ClipartsListApiView(APIView):
-
-    def get(self, request):
-        queryset = Clipart.objects.all()
+    def list(self, request, *args, **kwargs):
+        instance = Clipart.objects.order_by('-views')
+        serializer = ClipartSerializer(instance, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def retrieve(self, request, slug, *args, **kwargs):
+        instance = get_object_or_404(Clipart, slug=slug)
+        instance.views += 1
+        instance.save()
+        serializer = ClipartSerializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def famous_cliparts(self, request):
+        queryset = Clipart.objects.order_by('-views')[:6]
         serializer = ClipartSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-class ClipartDetailApiView(APIView):
-
-    def get(self, request, slug):
-        query = get_object_or_404(Clipart, slug=slug)
-        query.views = query.views + 1
-        query.save()
-        serializer = ClipartSerializer(query)
+    
+    def new_cliparts(self, request):
+        queryset = Clipart.objects.order_by('-published_date')[:6]
+        serializer = ClipartSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
