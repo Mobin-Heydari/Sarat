@@ -22,7 +22,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       mouseX.set(clientX - left);
       mouseY.set(clientY - top);
     }
-    console.log(type)
     return (
       <motion.div
         style={{

@@ -51,16 +51,16 @@ export function ContactForm() {
     // Client-side validation for required fields
     let errors: { [key: string]: string } = {};
     if (!form.f_name.value.trim()) {
-      errors.f_name = "First name is required.";
+      errors.f_name = "نام لازم است.";
     }
     if (!form.l_name.value.trim()) {
-      errors.l_name = "Last name is required.";
+      errors.l_name = "نام خانوادگی لازم است.";
     }
-    if (!form.email.value.trim()) {
-      errors.email = "Email is required.";
+    if (!form.phone.value.trim()) {
+      errors.phone = "شماره لازم است.";
     }
     if (!form.title.value.trim()) {
-      errors.title = "Title is required.";
+      errors.title = "عنوان لازم است.";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -73,7 +73,6 @@ export function ContactForm() {
     // Append fields to FormData
     formData.append("f_name", form.f_name.value);
     formData.append("l_name", form.l_name.value);
-    formData.append("email", form.email.value);
     formData.append("phone", form.phone.value);
     formData.append("title", form.title.value);
     formData.append("content", form.content.value);
@@ -161,14 +160,6 @@ export function ContactForm() {
             )}
           </LabelInputContainer>
         </div>
-        {/* Email */}
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">آدرس ایمیل</Label>
-          <Input id="email" name="email" placeholder="mobinheydari.developer@gmail.com" type="email" />
-          {fieldErrors.email && (
-            <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
-          )}
-        </LabelInputContainer>
         {/* Phone */}
         <LabelInputContainer className="mb-4">
           <Label htmlFor="phone">شماره تلفن</Label>
