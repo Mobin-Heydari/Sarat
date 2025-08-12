@@ -29,9 +29,6 @@ class Contact(models.Model):
         blank=True,
         verbose_name='تلفن'
     )
-    email = models.EmailField(
-        verbose_name='ایمیل'
-    )
 
     status = models.CharField(
         max_length=3,
