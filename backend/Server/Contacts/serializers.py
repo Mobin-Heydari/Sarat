@@ -18,7 +18,6 @@ class ContactSerializer(serializers.ModelSerializer):
             f_name=validated_data['f_name'],
             l_name=validated_data['l_name'],
             phone=validated_data.get('phone'),
-            email=validated_data['email'],
             ip_address=validated_data.get('ip_address'),
             user_agent=validated_data.get('user_agent'),
             attachment=validated_data.get('attachment')

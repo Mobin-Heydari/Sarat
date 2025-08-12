@@ -1,5 +1,3 @@
-# contacts/admin.py
-
 from django.contrib import admin
 from .models import Contact
 
@@ -22,7 +20,6 @@ class ContactAdmin(admin.ModelAdmin):
         'title',
         'f_name',
         'l_name',
-        'email',
         'phone',
         'status',
         'is_readed',
@@ -44,7 +41,6 @@ class ContactAdmin(admin.ModelAdmin):
         'content',
         'f_name',
         'l_name',
-        'email',
         'phone',
     )
 
@@ -88,7 +84,6 @@ class ContactAdmin(admin.ModelAdmin):
             'fields': (
                 'f_name',
                 'l_name',
-                'email',
                 'phone',
             )
         }),
