@@ -1,13 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 
-from . import views
-
+from .routers import ClipartRouter
 
 
 app_name = "Cliparts"
 
+router = ClipartRouter()
 
 urlpatterns = [
-    path('list/', views.ClipartsListApiView.as_view()),
-    path('detail/<slug:slug>/', views.ClipartDetailApiView.as_view()),
+    path('', include(router.get_urls())),
 ]
