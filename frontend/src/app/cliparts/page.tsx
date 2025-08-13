@@ -9,7 +9,7 @@ import { BsCollectionPlay } from "react-icons/bs";
 
 export default async function Cliparts() {
 
-    const response = await fetch(`http://127.0.0.1:8000/cliparts/list/`);
+    const response = await fetch(`http://127.0.0.1:8000/cliparts/`);
     const cliparts: Clipart[] = await response.json();
 
     return (
@@ -28,7 +28,7 @@ export default async function Cliparts() {
             <section className="relative overflow-hidden w-full h-full flex flex-col justify-between gap-8">
                 <h2 className="text-3xl font-bold text-center my-5 bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark">نماهنگ های ما</h2>
                 <p className="text-lg text-wrap text-right text-main-text-light dark:text-main-text-dark mb-3 p-3">توضبحات مختصر و مفید.</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-y-7 gap-x-12">
                     {cliparts.map(item => (
                         <div key={item.slug}>
                             {/* <div dangerouslySetInnerHTML={{ __html: item.text }} /> */}
