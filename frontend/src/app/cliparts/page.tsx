@@ -1,9 +1,20 @@
 import Image from "next/image";
+import { Metadata } from "next";
+
 
 import ClipartCard from "@/components/ClipartCard";
 import { Clipart } from "@/types/clipart";
 import HeroSection from "@/components/HeroSection";
 import { BsCollectionPlay } from "react-icons/bs";
+
+
+
+
+export const metadata: Metadata = {
+  title: 'نماهنگ ها',
+  description: 'نماهنگ های برتر گروه سرود صراط.',
+};
+
 
 
 
