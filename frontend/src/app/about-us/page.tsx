@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 
 import HeroSection from "@/components/HeroSection"
 import { BsHouseExclamation } from "react-icons/bs"
@@ -5,6 +6,14 @@ import { BsHouseExclamation } from "react-icons/bs"
 import { TracingBeam } from "@/components/ui/TrackingBeam"
 
 import { aboutData } from "@/data"
+
+
+
+
+export const metadata: Metadata = {
+  title: 'درباره ما',
+  description: 'با گروه سرود صراط بیشتر آشنا شوید.',
+};
 
 
 
