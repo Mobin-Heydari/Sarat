@@ -1,3 +1,4 @@
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 
 import { CiMusicNote1 } from "react-icons/ci";
@@ -8,22 +9,45 @@ import HeroSection from "@/components/HeroSection";
 import MusicPlayer from "@/components/MusicPlayer";
 
 
+type Props = {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  console.log("Metadata params:", params);
+
+  try {
+    const res = await fetch(`http://127.0.0.1:8000/audios/detail/${params.slug}`, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const audio: Audio = await res.json();
+
+    return {
+      title: audio.title,
+      description: audio.description,
+    };
+  } catch (e) {
+    console.error("Metadata fetch failed:", e);
+    return {
+      title: 'یافت نشد',
+      description: 'صوت یافت نشده است صبر کنید.',
+    };
+  }
+}
+
+
+
 export const dynamic = 'force-dynamic';
 
-export default async function MusicDetail({
-  params,
-}: {
-  params: { slug: string };
-}) {
-    // ① await the params proxy
-    const { slug } = await params;
+export default async function MusicDetail({ params }: Props) {
+    const { slug } = params; // ✅ already available
 
-    // ② fetch with the real slug
     const response = await fetch(
         `http://127.0.0.1:8000/audios/detail/${slug}`,
-        { cache: 'no-store' }      // disable caching if you need always-fresh data
+        { cache: 'no-store' }
     );
+
     const data: Audio = await response.json();
+
     return (
         <main className="flex flex-col justify-between gap-9 h-auto w-full xl:p-12 p-4">
             {/* Hero */}
