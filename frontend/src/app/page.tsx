@@ -1,10 +1,10 @@
 import { BsCollectionPlay } from "react-icons/bs";
 import { ContactForm } from "@/components/ContactForm";
-import { ScrollReveal } from "@/components/ScrollReveal";
 import HeroSection from "@/components/HeroSection";
 import FamousCliparts from "@/components/FamousCliparts";
 import Link from "next/link";
 import ClipartsSlider from "@/components/ClipartsSlider";
+import FamousMusics from "@/components/FamousMusics";
 
 
 
@@ -12,7 +12,7 @@ import ClipartsSlider from "@/components/ClipartsSlider";
 
 export default function Home() {
   return (
-    <main className="flex flex-col justify-between gap-6 h-auto w-full px-12 py-5">
+    <main className="flex flex-col justify-between gap-20 h-auto w-full px-12 py-5">
       {/* Hero */}
       <HeroSection
         title="مجموعه ی صراط"
@@ -43,7 +43,16 @@ export default function Home() {
         <FamousCliparts />
       </section>
 
-      <ScrollReveal />
+      <section className="flex flex-col justify-between gap-9">
+        <div className="flex justify-between flex-col md:flex-row items-center gap-y-9 mx-2">
+          <h2 className="text-3xl font-bold text-center bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark">پربازدید ترین و محبوبترین صوت ها</h2>
+          <Link href="/musics/" className="text-xl font-bold  bg-base-light dark:bg-base-dark border-2 p-3 rounded-xl border-primary-light dark:border-primary-dark hover:text-highlight-text-light hover:bg-primary-light dark:hover:text-highlight-text-dark dark:hover:bg-primary-dark transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
+          مشاهده بیشتر
+          </Link>
+        </div>
+        <FamousMusics />
+      </section>
+
       <ContactForm />
     </main>
   );
