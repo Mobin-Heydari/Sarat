@@ -17,7 +17,7 @@ export default function ClipartCard(item: Clipart) {
     
 
     return (
-        <CardContainer className="inter-var">
+        <CardContainer className="inter-var w-full">
             <CardBody className="relative group/card hover:shadow-primary-light  hover:shadow-2xl dark:hover:shadow-primary-dark bg-base-light dark:bg-base-dark dark:border-base-light/[0.2] border-base-dark/[0.1] w-full h-full rounded-xl p-6 border">
                 <CardItem
                     translateZ="50"
