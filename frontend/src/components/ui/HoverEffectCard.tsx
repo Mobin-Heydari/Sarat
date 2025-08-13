@@ -17,15 +17,12 @@ export const HoverEffectCards = ({
 
   return (
     <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-10",
-        className
-      )}
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-y-7 gap-x-12"
     >
       {items.map((item, idx) => (
         <Link key={item.slug} href={`/musics/${item.slug}`}>
           <motion.div
-            className="relative group block h-full w-full p-2 cursor-pointer"
+            className="relative group block h-full w-full p-2 cursor-pointer transition delay-75 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110"
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}
             whileHover={{ scale: 1.02 }}
