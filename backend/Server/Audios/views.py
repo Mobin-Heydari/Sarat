@@ -24,12 +24,12 @@ class AudioViewSet(ViewSet):
         serializer = AudioSerializer(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    def famous_musics(self, request):
+    def famous_audios(self, request):
         queryset = Audio.objects.order_by('-views')[:6]
         serializer = AudioSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    def new_musics(self, request):
+    def new_audios(self, request):
         queryset = Audio.objects.order_by('-published_date')[:6]
         serializer = AudioSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
