@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Metadata } from "next";
 
 import { CiMusicNote1 } from "react-icons/ci";
 
@@ -9,11 +10,15 @@ import MusicHoverEffectSection from "@/components/MusicHoverEffectSection";
 
 
 
+export const metadata: Metadata = {
+  title: 'صوت ها',
+  description: 'صوت های برتر گروه سرود صراط.',
+};
 
 
 export default async function Musics() {
 
-    const response = await fetch(`http://127.0.0.1:8000/audios/list/`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/`);
     const items: Audio[] = await response.json();
 
     return (
