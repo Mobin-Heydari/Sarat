@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 
 import { FaInstalod } from "react-icons/fa6";
@@ -7,6 +8,13 @@ import { Story } from "@/types/stories";
 import HeroSection from "@/components/HeroSection";
 import StoryCard from "@/components/StoryCards";
 
+
+
+
+export const metadata: Metadata = {
+  title: 'استوری ها',
+  description: 'استوری های برتر گروه سرود صراط.',
+};
 
 
 
