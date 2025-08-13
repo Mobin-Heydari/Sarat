@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 
 import { BsViewList } from 'react-icons/bs';
@@ -6,7 +7,10 @@ import { ContactForm } from "@/components/ContactForm";
 import HeroSection from "@/components/HeroSection";
 
 
-
+export const metadata: Metadata = {
+  title: 'تماس باما',
+  description: 'تماس و همکاری مستقیم با گروه سرود صراط.',
+};
 
 
 export default function ContactUs() {
