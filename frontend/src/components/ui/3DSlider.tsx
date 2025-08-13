@@ -102,7 +102,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
               opacity: current === index ? 1 : 0.5,
             }}
             alt={title}
-            src={src}
+            src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${src}`}
             onLoad={imageLoaded}
             loading="eager"
             decoding="sync"
