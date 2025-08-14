@@ -23,7 +23,6 @@ export default function  FamousMusics() {
                 const data = await response.json();
                 setAudios(data);
             } catch (err) {
-                console.error(err)
                 setError(err)
             } finally {
                 setLoading(false);

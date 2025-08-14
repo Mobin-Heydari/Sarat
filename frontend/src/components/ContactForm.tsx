@@ -88,7 +88,7 @@ export function ContactForm() {
     });
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/contacts/create/", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/contacts/create/`, {
         method: "POST",
         body: formData,
       });

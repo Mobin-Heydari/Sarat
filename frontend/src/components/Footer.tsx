@@ -24,7 +24,7 @@ const socialMedia = [
 export function Footer() {
   return (
     <footer className="w-[calc(100%-4rem)] mx-auto rounded-md h-[25rem] overflow-hidden mb-3">
-      <Vortex className="flex flex-col items-center justify-center px-2 md:px-10 py-4 w-full h-full" particleCount={300}>
+      <Vortex className="flex flex-col items-center justify-center px-2 md:px-10 py-4 w-full h-full" particleCount={70}>
         <div className="w-full absolute left-0">
           <img src="/footer-grid.svg" alt="footer grid" className="w-full h-64 opacity-10"/>
         </div>

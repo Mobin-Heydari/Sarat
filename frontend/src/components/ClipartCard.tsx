@@ -34,7 +34,7 @@ export default function ClipartCard(item: Clipart) {
                 </CardItem>
                 <CardItem translateZ="100" className="w-full mt-4">
                     <img
-                        src={`http://127.0.0.1:8000${item.poster}`}
+                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.poster}`}
                         height="1000"
                         width="1000"
                         className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"

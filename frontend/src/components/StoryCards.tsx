@@ -15,7 +15,7 @@ export default function StoryCard( item : Story ) {
         <div className="flex justify-evenly gap-4 flex-col">
             <div className="p-3 flex justify-center items-center">
                 <img
-                    src={`http://127.0.0.1:8000${item.poster}`}
+                    src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.poster}`}
                     alt={item.title}
                     className="relative h-36 w-36 rounded-full border-2 border-primary-light dark:border-primary-dark object-cover cursor-pointer"
                     onClick={() => router.push(`/stories/${item.slug}`)}

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   console.log("Metadata params:", params);
 
   try {
-    const res = await fetch(`http://127.0.0.1:8000/audios/detail/${params.slug}`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/detail/${params.slug}/`, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const audio: Audio = await res.json();
 
@@ -26,7 +26,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: audio.description,
     };
   } catch (e) {
-    console.error("Metadata fetch failed:", e);
     return {
       title: 'یافت نشد',
       description: 'صوت یافت نشده است صبر کنید.',
@@ -42,7 +41,7 @@ export default async function MusicDetail({ params }: Props) {
     const { slug } = params; // ✅ already available
 
     const response = await fetch(
-        `http://127.0.0.1:8000/audios/detail/${slug}`,
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/detail/${slug}/`,
         { cache: 'no-store' }
     );
 
@@ -66,8 +65,8 @@ export default async function MusicDetail({ params }: Props) {
                         {data.title}
                     </h1>
                     <MusicPlayer
-                        src={`http://127.0.0.1:8000${data.music}`}
-                        poster={`http://127.0.0.1:8000${data.poster}`}
+                        src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${data.music}`}
+                        poster={`${process.env.NEXT_PUBLIC_MEDIA_URL}${data.poster}`}
                         title={data.title}
                     />
                 </div>

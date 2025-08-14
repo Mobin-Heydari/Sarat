@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default async function Stories() {
 
-    const response = await fetch(`http://127.0.0.1:8000/stories/list/`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/stories/list/`);
     const stories: Story[] = await response.json();
 
     return (

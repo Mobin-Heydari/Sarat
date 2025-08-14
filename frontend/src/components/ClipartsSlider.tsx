@@ -30,7 +30,6 @@ export default function  ClipartsSlider() {
                 const data = await response.json();
                 setCliparts(data);
             } catch (err) {
-                console.error(err)
                 setError(err)
             } finally {
                 setLoading(false);
