@@ -1,9 +1,38 @@
+import { Metadata } from "next";
 import { FaInstalod } from "react-icons/fa6";
 
 
 import { Story } from "@/types/stories";
 import HeroSection from '@/components/HeroSection';
 import StoryVideoPlayer from "@/components/StoryVideoPlayer";
+
+
+
+type Props = {
+  params: { slug: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  try {
+    const res = await fetch(`http://127.0.0.1:8000/cliparts/detail/${params.slug}`, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const story: Story = await res.json();
+
+    return {
+      title: story.title,
+      description: `صوت ${story.title} یکی از بهترین صوت ها و سرود های گروه سرود صراط`,
+    };
+  } catch (e) {
+    return {
+      title: 'یافت نشد',
+      description: 'صوت یافت نشده است صبر کنید.',
+    };
+  }
+}
+
+
+export const dynamic = 'force-dynamic';
+
 
 
 export default async function StoryDetail({ params }: { params: { slug: string } }) {
