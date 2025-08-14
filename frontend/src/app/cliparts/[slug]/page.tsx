@@ -17,7 +17,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
-    const res = await fetch(`http://127.0.0.1:8000/cliparts/detail/${params}`, { cache: 'no-store' });
+    const res = await fetch(`http://127.0.0.1:8000/cliparts/detail/${params.slug}`, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const clipart: Clipart = await res.json();
 
