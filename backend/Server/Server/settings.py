@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Cliparts.apps.ClipartsConfig',
     'Stories.apps.StoriesConfig',
     'Audios.apps.AudiosConfig',
+    'Funny.apps.FunnyConfig',
 ]
 
 MIDDLEWARE = [
