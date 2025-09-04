@@ -20,8 +20,8 @@ class Funny(models.Model):
     updated_at = models.DateTimeField(verbose_name="تاریخ بهروزرسانی", auto_now=True)
 
     class Meta:
-        verbose_name = "نماهنگ"
-        verbose_name_plural = "نماهنگ ها"
+        verbose_name = "بامزه"
+        verbose_name_plural = "بامزه ها"
 
     
     def __str__(self):
@@ -50,3 +50,7 @@ class FunnyContent(models.Model):
 
     def __str__(self):
         return self.funny.title
+    
+    class Meta:
+        verbose_name = "محتوا"
+        verbose_name_plural = "محتوا ها"
