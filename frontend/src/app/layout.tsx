@@ -19,6 +19,11 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <head>
+        <meta charSet="UTF-8"></meta>
+        <meta name="author" content="Mobin Heyadri"></meta>
+        <link rel="icon" href="/logo.png" sizes="64" />
+      </head>
       <body className="dark:bg-base-dark bg-base-light font-custom flex flex-col justify-between gap-6">
         <Theme>
           <Navbar />

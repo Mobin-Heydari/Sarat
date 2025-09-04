@@ -70,7 +70,7 @@ export const Vortex = (props: VortexProps) => {
   const xOff = 0.00125;
   const yOff = 0.00125;
   const zOff = 0.0005;
-  const backgroundColor = resolvedTheme === "dark" ? "#031525" : "#EAF1F0";
+  const backgroundColor = resolvedTheme === "dark" ? "#242729" : "#fffaec";
 
   let tick = 0;
   const noise3D = createNoise3D();
