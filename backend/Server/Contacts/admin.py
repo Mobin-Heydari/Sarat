@@ -1,5 +1,14 @@
 from django.contrib import admin
+from django.utils.html import format_html
+import jdatetime
 from .models import Contact
+
+
+def to_jalali(dt):
+    if not dt:
+        return "—"
+    jdt = jdatetime.datetime.fromgregorian(datetime=dt)
+    return jdt.strftime("%Y/%m/%d - %H:%M")
 
 
 @admin.action(description='علامت‌گذاری تماس‌های انتخاب‌شده به‌صورت «خوانده شده»')
@@ -14,7 +23,6 @@ def make_ignored(modeladmin, request, queryset):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    # Columns shown on the change list page
     list_display = (
         'id',
         'title',
@@ -24,60 +32,30 @@ class ContactAdmin(admin.ModelAdmin):
         'status',
         'is_readed',
         'is_ignored',
-        'created_at',
+        'attachment_link',
+        'created_at_jalali',
+        'updated_at_jalali',
     )
-
-    # Which fields you can filter by in the sidebar
-    list_filter = (
-        'status',
-        'is_readed',
-        'is_ignored',
-        'created_at',
-    )
-
-    # Search box fields
-    search_fields = (
-        'title',
-        'content',
-        'f_name',
-        'l_name',
-        'phone',
-    )
-
-    # Make these fields read-only in the detail/edit view
+    list_filter = ('status', 'is_readed', 'is_ignored', 'created_at')
+    search_fields = ('title', 'content', 'f_name', 'l_name', 'phone')
     readonly_fields = (
         'ip_address',
         'user_agent',
-        'created_at',
-        'updated_at',
+        'attachment_link',
+        'created_at_jalali',
+        'updated_at_jalali',
     )
-
-    # Allow inline editing of status and read flag from the change list
-    list_editable = (
-        'status',
-        'is_readed',
-        'is_ignored',
-    )
-
-    # Bulk actions
-    actions = (
-        make_read,
-        make_ignored,
-    )
-
-    # Default ordering
+    list_editable = ('status', 'is_readed', 'is_ignored')
+    actions = (make_read, make_ignored)
     ordering = ('-created_at',)
-
-    # Pagination size
     list_per_page = 25
 
-    # Organize fields into logical groups (Jazzmin will render these as collapsible panels)
     fieldsets = (
         ('جزئیات تماس', {
             'fields': (
                 'title',
                 'content',
-                'attachment',
+                'attachment_link',
             )
         }),
         ('اطلاعات شخصی', {
@@ -99,8 +77,23 @@ class ContactAdmin(admin.ModelAdmin):
             'fields': (
                 'ip_address',
                 'user_agent',
-                'created_at',
-                'updated_at',
+                'created_at_jalali',
+                'updated_at_jalali',
             )
         }),
     )
+
+    # --- Custom Display Methods ---
+    def created_at_jalali(self, obj):
+        return to_jalali(obj.created_at)
+    created_at_jalali.short_description = "تاریخ ایجاد (جلالی)"
+
+    def updated_at_jalali(self, obj):
+        return to_jalali(obj.updated_at)
+    updated_at_jalali.short_description = "تاریخ بروزرسانی (جلالی)"
+
+    def attachment_link(self, obj):
+        if obj.attachment:
+            return format_html('<a href="{}" target="_blank">دانلود فایل</a>', obj.attachment.url)
+        return "—"
+    attachment_link.short_description = "پیوست"
