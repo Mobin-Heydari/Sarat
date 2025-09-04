@@ -12,4 +12,5 @@ urlpatterns = [
     path('cliparts/', include('Cliparts.urls', namespace="Cliparts")),
     path('stories/', include('Stories.urls', namespace="Stories")),
     path('audios/', include('Audios.urls', namespace="Audios")),
+    path('funny/', include('Funny.urls', namespace="Funny")),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
