@@ -39,7 +39,7 @@ export const HoverEffectCards = ({
               <div className="p-4">
                 <CardTitle>{item.title}</CardTitle>
                 <CardDescription>{item.description}</CardDescription>
-                <CardMeta date={item.created_at} />
+                <CardMeta date={item.created_at_jalali} />
               </div>
             </Card>
           </motion.div>

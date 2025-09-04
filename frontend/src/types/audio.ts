@@ -11,6 +11,6 @@ export interface Audio {
 
     views: number;
 
-    created_at: string;
-    updated_at: string;
+    created_at_jalali: string;
+    updated_at_jalali: string;
 }

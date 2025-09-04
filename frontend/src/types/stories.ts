@@ -3,8 +3,8 @@ interface StoryVideo {
     title: string;
     slug: string;
     video: string;
-    created_at: string;
-    updated_at: string;
+    created_at_jalali: string;
+    updated_at_jalali: string;
 }
 
 
@@ -16,8 +16,8 @@ export interface Story {
 
     views: number;
 
-    created_at: string;
-    updated_at: string;
+    created_at_jalali: string;
+    updated_at_jalali: string;
 
     videos: StoryVideo[]
 }
