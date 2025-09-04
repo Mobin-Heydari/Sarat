@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
+    'jalali_date',
 
     # custom apps
     'Contacts.apps.ContactsConfig',
