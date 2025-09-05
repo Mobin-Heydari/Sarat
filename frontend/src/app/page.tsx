@@ -33,15 +33,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col justify-between gap-9 mx-auto">
-        <div className="flex justify-between flex-col md:flex-row items-center gap-y-9 mx-2">
-          <h2 className="text-3xl font-bold text-center bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark">پربازدید ترین و محبوبترین نماهنگ ها</h2>
-          <Link href="/cliparts/" className="text-xl font-bold  bg-base-light dark:bg-base-dark border-2 p-3 rounded-xl border-primary-light dark:border-primary-dark hover:text-highlight-text-light hover:bg-primary-light dark:hover:text-highlight-text-dark dark:hover:bg-primary-dark transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
-          مشاهده بیشتر
-          </Link>
-        </div>
-        <FamousCliparts />
-      </section>
+      <FamousCliparts />
 
       <section className="flex flex-col justify-between gap-9">
         <div className="flex justify-between flex-col md:flex-row items-center gap-y-9 mx-2">
