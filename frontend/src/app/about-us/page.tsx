@@ -1,65 +1,42 @@
-import { Metadata } from "next";
+import { Metadata } from 'next';
+import { BsPeople } from 'react-icons/bs';
 
-import HeroSection from "@/components/HeroSection"
-import { BsHouseExclamation } from "react-icons/bs"
 
-import { TracingBeam } from "@/components/ui/TrackingBeam"
 
-import { aboutData } from "@/data"
-
+import HeroSection from '@/components/HeroSection';
+import AboutMission from '@/components/about/AboutMission';
+import AboutStats from '@/components/about/AboutStats';
+import AboutTeam from '@/components/about/AboutTeam';
+import AboutHistory from '@/components/about/AboutHistory';
+import AboutValues from '@/components/about/AboutValues';
+import AboutJoinUs from '@/components/about/AboutJoinUs';
 
 
 
 export const metadata: Metadata = {
-  title: 'درباره ما',
-  description: 'با گروه سرود صراط بیشتر آشنا شوید.',
+  title: 'درباره‌ی ما',
+  description: 'آشنایی با گروه سرود صراط، اهداف، اعضا، ارزش‌ها و مسیر فعالیت‌های فرهنگی و هنری.',
 };
 
+export default function AboutUs() {
+  return (
+    <main className="flex flex-col gap-16 px-4 md:px-12 py-10">
+      <HeroSection
+        title="درباره‌ی گروه صراط"
+        mainText="با ما بیشتر آشنا شوید"
+        subText="مسیر فرهنگی و هنری ما را بشناسید"
+        buttonTitle="تماس با ما"
+        buttonIcon={<BsPeople />}
+        buttonPosition="right"
+        buttonUrl="/contact"
+      />
 
-
-export default async function AboutUs() {
-    return (
-        <main className="mb-24">
-            {/* Hero */}
-            <HeroSection
-                title="درباره ی ما"
-                mainText="گروه سرود صراط"
-                subText="به مجموعه ی صراط آمدید"
-                buttonTitle="خانه"
-                buttonIcon={ <BsHouseExclamation /> }
-                buttonPosition="right"
-                buttonUrl="/"
-            />
-            <section className="">
-                <TracingBeam className="px-8">
-                    <div className="max-w-2xl mx-auto antialiased pt-4 relative" dir="rtl">
-                        {aboutData.map((item, index) => (
-                            <div key={`content-${index}`} className="mb-10">
-                                <h2 className="bg-primary-light dark:bg-primary-dark text-main-text-light dark:text-main-text-dark rounded-full text-sm w-fit px-4 py-1 mb-4">
-                                    {item.badge}
-                                </h2>
-                    
-                                <p className="text-xl mb-4">
-                                    {item.title}
-                                </p>
-                    
-                                <div className="text-sm prose prose-sm dark:prose-invert text-main-text-light dark:text-main-text-dark">
-                                    {item?.image && (
-                                        <img
-                                        src={item.image}
-                                        alt="blog thumbnail"
-                                        height="1000"
-                                        width="1000"
-                                        className="rounded-lg mb-10 object-cover"
-                                        />
-                                    )}
-                                    {item.description}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </TracingBeam>
-            </section>
-        </main>
-    )
+      <AboutMission />
+      <AboutStats />
+      <AboutValues />
+      <AboutTeam />
+      <AboutHistory />
+      <AboutJoinUs />
+    </main>
+  );
 }
