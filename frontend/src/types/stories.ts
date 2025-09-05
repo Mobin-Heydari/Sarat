@@ -11,6 +11,7 @@ interface StoryVideo {
 export interface Story {
     title: string;
     slug: string;
+    text: string;
 
     poster: string;
 
