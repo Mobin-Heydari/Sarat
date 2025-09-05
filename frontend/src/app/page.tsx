@@ -5,7 +5,7 @@ import FamousCliparts from "@/components/FamousCliparts";
 import Link from "next/link";
 import ClipartsSlider from "@/components/ClipartsSlider";
 import FamousMusics from "@/components/FamousMusics";
-
+import FunnyCardsContainer from "@/components/NewFunnyMoments";
 
 
 
@@ -52,6 +52,8 @@ export default function Home() {
         </div>
         <FamousMusics />
       </section>
+
+      <FunnyCardsContainer />
 
       <ContactForm />
     </main>
