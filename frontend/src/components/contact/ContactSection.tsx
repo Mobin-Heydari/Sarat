@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import ContactInfo from '@/components/contact/ContactInfo';
 import { ContactForm } from '@/components/contact/ContactForm';
 import Link from 'next/link';
+import ContactTeam from './ContactTeam';
 
 
 export default function ContactSection() {
@@ -23,6 +24,7 @@ export default function ContactSection() {
         <div className="flex flex-col justify-center gap-10 py-4 px-10">
           {/* Contact Info */}
           <ContactInfo />
+          <ContactTeam />
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

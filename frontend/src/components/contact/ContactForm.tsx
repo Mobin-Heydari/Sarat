@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Input } from '../ui/Input';
 import { Label } from '../ui/Label';
 import { FileUpload } from '../ui/FileUpload';
@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils';
 import { Textarea } from '../ui/Textarea';
 import { FaPhoneAlt } from 'react-icons/fa';
 
-// Helper function to fetch the public IP address
 async function getPublicIP() {
   try {
     const response = await fetch('https://api.ipify.org?format=json');
@@ -103,25 +102,23 @@ export function ContactForm() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="flex flex-col justify-center gap-5 shadow-input w-full max-w-lg border border-primary-light dark:border-primary-dark rounded-xl p-4 md:rounded-2xl md:p-8 bg-base-light/[0.5] dark:bg-base-dark/[0.5]"
+      className="flex flex-col justify-center gap-8 w-full max-w-2xl mx-auto border border-primary-light dark:border-primary-dark rounded-2xl p-8 bg-white/30 dark:bg-black/30 backdrop-blur-md shadow-xl"
     >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        className="flex flex-col justify-center gap-6"
+        className="flex flex-col gap-6"
       >
-        <div className="flex flex-col gap-3">
-          <h4 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark text-center">
-            اطلاعات تماس
-          </h4>
-          <p className="text-sm text-main-text-light dark:text-main-text-dark">
+        <div className="text-center">
+          <h4 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">اطلاعات تماس</h4>
+          <p className="text-sm text-main-text-light dark:text-main-text-dark mt-2">
             شما می‌توانید با پر کردن فرم تماس با ما، درخواست‌ها و نظرات خود را با ما به اشتراک بگذارید.
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
-          <FaPhoneAlt className="text-3xl text-primary-light dark:text-primary-dark" />
+        <div className="flex items-center gap-4 justify-center">
+          <FaPhoneAlt className="text-2xl text-primary-light dark:text-primary-dark" />
           <div className="flex flex-col gap-1">
             <span className="text-lg font-bold text-main-text-light dark:text-main-text-dark">تلفن:</span>
             <p className="text-sm text-main-text-light/[0.7] dark:text-main-text-dark/[0.7]">0912-000-0000</p>
@@ -135,35 +132,67 @@ export function ContactForm() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className="my-8"
+        className="space-y-6"
       >
-        <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-          <LabelInputContainer>
-            <Label htmlFor="f_name">نام</Label>
-            <Input id="f_name" name="f_name" placeholder="مبین" type="text" aria-label="نام" />
-            {fieldErrors.f_name && <p className="text-red-500 text-xs mt-1">{fieldErrors.f_name}</p>}
-          </LabelInputContainer>
-          <LabelInputContainer>
-            <Label htmlFor="l_name">نام خانوادگی</Label>
-            <Input id="l_name" name="l_name" placeholder="حیدری" type="text" aria-label="نام خانوادگی" />
-            {fieldErrors.l_name && <p className="text-red-500 text-xs mt-1">{fieldErrors.l_name}</p>}
-          </LabelInputContainer>
-        </div>
+        {[
+          { id: 'f_name', label: 'نام', placeholder: 'مبین', error: fieldErrors.f_name },
+          { id: 'l_name', label: 'نام خانوادگی', placeholder: 'حیدری', error: fieldErrors.l_name },
+        ].map((field, i) => (
+          <motion.div
+            key={field.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.2, duration: 0.5 }}
+          >
+            <LabelInputContainer>
+              <Label htmlFor={field.id}>{field.label}</Label>
+              <Input
+                id={field.id}
+                name={field.id}
+                placeholder={field.placeholder}
+                type="text"
+                aria-label={field.label}
+                className="rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark transition-all"
+              />
+              {field.error && <p className="text-red-500 text-xs mt-1">{field.error}</p>}
+            </LabelInputContainer>
+          </motion.div>
+        ))}
 
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer>
           <Label htmlFor="phone">شماره تلفن</Label>
-          <Input id="phone" name="phone" placeholder="0910-207-2859" type="tel" aria-label="شماره تلفن" />
+          <Input
+            id="phone"
+            name="phone"
+            placeholder="0910-207-2859"
+            type="tel"
+            aria-label="شماره تلفن"
+            className="rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark transition-all"
+          />
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-8">
+        <LabelInputContainer>
           <Label htmlFor="title">عنوان</Label>
-          <Input id="title" name="title" placeholder="عنوان پیام" type="text" aria-label="عنوان" />
+          <Input
+            id="title"
+            name="title"
+            placeholder="عنوان پیام"
+            type="text"
+            aria-label="عنوان"
+            className="rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark transition-all"
+          />
           {fieldErrors.title && <p className="text-red-500 text-xs mt-1">{fieldErrors.title}</p>}
         </LabelInputContainer>
 
-        <LabelInputContainer className="mb-8">
+        <LabelInputContainer>
           <Label htmlFor="content">پیام</Label>
-          <Textarea id="content" name="content" placeholder="پیام شما..." aria-label="پیام" />
+          <Textarea
+            id="content"
+            name="content"
+            placeholder="پیام شما..."
+            aria-label="پیام"
+            className="rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark transition-all"
+          />
         </LabelInputContainer>
 
         <FileUpload key={fileUploadKey} onChange={handleFileChange} />
@@ -173,22 +202,25 @@ export function ContactForm() {
           disabled={isSubmitting}
           whileTap={{ scale: 0.95 }}
           whileHover={{ scale: 1.02 }}
-          className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br font-bold text-main-text-light dark:text-main-text-dark shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] bg-primary-light/[0.4] dark:bg-primary-dark/[0.4] dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset] transition-all duration-300"
+          className="relative block h-12 w-full rounded-full bg-gradient-to-r from-primary-light via-success-light to-selected-light dark:from-primary-dark dark:via-success-dark dark:to-selected-dark text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300"
         >
           {buttonMessage}
           <BottomGradient />
         </motion.button>
 
-        {buttonMessage === 'پیام ارسال شد 🎉' && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-green-600 text-center font-bold mt-4"
-          >
-            پیام شما با موفقیت ارسال شد 🎉
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {buttonMessage === 'پیام ارسال شد 🎉' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.5 }}
+              className="text-green-600 text-center font-bold mt-4"
+            >
+              پیام شما با موفقیت ارسال شد 🎉
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.form>
     </motion.div>
   );
@@ -201,7 +233,6 @@ const BottomGradient = () => (
   </>
 );
 
-
 const LabelInputContainer = ({
   children,
   className,
@@ -209,5 +240,5 @@ const LabelInputContainer = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  return <div className={cn("flex w-full flex-col space-y-2", className)}>{children}</div>;
+  return <div className={cn('flex w-full flex-col space-y-2', className)}>{children}</div>;
 };
