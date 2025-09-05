@@ -1,10 +1,12 @@
 import { BsCollectionPlay } from "react-icons/bs";
-import { ContactForm } from "@/components/ContactForm";
+
+
 import HeroSection from "@/components/HeroSection";
 import FamousCliparts from "@/components/FamousCliparts";
 import ClipartsSlider from "@/components/ClipartsSlider";
 import FunnyCardsContainer from "@/components/NewFunnyMoments";
 import FamousMusicSection from "@/components/FamousMusicsSection";
+import ContactSection from "@/components/contact/ContactSection";
 
 
 
@@ -38,7 +40,7 @@ export default function Home() {
 
       <FunnyCardsContainer />
 
-      <ContactForm />
+      <ContactSection />
     </main>
   );
 }
