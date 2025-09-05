@@ -1,39 +1,59 @@
-import Image from "next/image";
-import { Metadata } from "next";
+import { Metadata } from 'next';
+import Link from 'next/link';
+import { CiMusicNote1 } from 'react-icons/ci';
+import { motion, Variants } from 'framer-motion';
 
-import { CiMusicNote1 } from "react-icons/ci";
-
-import { Audio } from "@/types/audio";
-
-import HeroSection from "@/components/HeroSection";
-import MusicHoverEffectSection from "@/components/MusicHoverEffectSection";
-
-
+import { Music } from '@/types/music';
+import HeroSection from '@/components/HeroSection';
+import MusicSection from '@/components/MusicSection';
 
 export const metadata: Metadata = {
   title: 'صوت ها',
   description: 'صوت های برتر گروه سرود صراط.',
 };
 
+const containerVariant: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.42, 0, 0.58, 1],
+      when: 'beforeChildren',
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardVariant: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
 
 export default async function Musics() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/`, {
+    next: { revalidate: 60 },
+  });
+  const items: Music[] = await response.json();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/`);
-    const items: Audio[] = await response.json();
+  return (
+    <main className="flex flex-col gap-12 h-auto w-full xl:p-12 p-4">
+      <HeroSection
+        title="مجموعه ی صراط"
+        mainText="صوت های برتر مجموعه"
+        subText="به مجموعه ی صراط آمدید"
+        buttonTitle="صوت ها"
+        buttonIcon={<CiMusicNote1 />}
+        buttonPosition="right"
+        buttonUrl="/audios"
+      />
 
-    return (
-        <main className="flex flex-col justify-between gap-9 h-auto w-full xl:p-12 p-4">
-            {/* Hero */}
-            <HeroSection
-                title="مجموعه ی صراط"
-                mainText="صوت های برتر مجموعه"
-                subText="به مجموعه ی صراط آمدید"
-                buttonTitle="صوت ها"
-                buttonIcon={ <CiMusicNote1 /> }
-                buttonPosition="right"
-                buttonUrl="/audios"
-            />
-            <MusicHoverEffectSection items={items} />
-        </main>
-    );
+      <MusicSection items={items} />
+    </main>
+  );
 }
