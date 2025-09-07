@@ -9,6 +9,7 @@ interface StoryVideo {
 
 
 export interface Story {
+    description: string;
     title: string;
     slug: string;
     text: string;

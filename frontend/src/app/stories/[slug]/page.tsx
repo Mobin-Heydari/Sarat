@@ -3,9 +3,7 @@ import { FaInstalod } from 'react-icons/fa6';
 import { Story } from '@/types/stories';
 
 import HeroSection from '@/components/HeroSection';
-import StoryBanner from '@/components/StoryBanner';
 import StoryVideoGallery from '@/components/StoryVideoGallery';
-import StoryDescription from '@/components/StoryDescription';
 
 type Props = {
   params: { slug: string };
@@ -14,16 +12,14 @@ type Props = {
 export const dynamic = 'force-dynamic';
 
 
-// ✅ FIXED: Await params.slug properly
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { slug } = props.params;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = params;
 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/stories/detail/${slug}/`, {
       cache: 'no-store',
     });
 
-    // ✅ Handle non-JSON responses
     const contentType = res.headers.get('content-type');
     if (!res.ok || !contentType?.includes('application/json')) {
       throw new Error('Invalid response');
@@ -31,19 +27,59 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
     const story: Story = await res.json();
 
+    const pageTitle = `${story.title} | استوری فرهنگی از گروه سرود صراط`;
+    const pageDescription =
+      story.description ||
+      `استوری "${story.title}" از مجموعه آثار کوتاه فرهنگی گروه سرود صراط، با پیام‌هایی از ایمان، همدلی و زیبایی.`
+
     return {
-      title: story.title,
-      description: `استوری ${story.title} یکی از بهترین استوری‌های گروه سرود صراط.`,
+      title: pageTitle,
+      description: pageDescription,
+      keywords: [
+        'استوری',
+        'استوری فرهنگی',
+        'استوری مذهبی',
+        'گروه سرود صراط',
+        'محتوای کوتاه',
+        'ویدیو کوتاه',
+        story.title,
+      ],
+      openGraph: {
+        title: pageTitle,
+        description: pageDescription,
+        url: `https://yourdomain.com/stories/${slug}`,
+        siteName: 'گروه سرود صراط',
+        images: [
+          {
+            url: `${process.env.NEXT_PUBLIC_MEDIA_URL}${story.poster}`,
+            width: 1200,
+            height: 630,
+            alt: story.title,
+          },
+        ],
+        locale: 'fa_IR',
+        type: 'video.other',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: pageTitle,
+        description: pageDescription,
+        images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${story.poster}`],
+      },
+      alternates: {
+        canonical: `https://yourdomain.com/stories/${slug}`,
+      },
     };
   } catch {
     return {
-      title: 'یافت نشد',
-      description: 'استوری یافت نشده است. لطفاً صبر کنید.',
+      title: 'استوری یافت نشد',
+      description: 'متأسفانه اطلاعات این استوری در حال حاضر در دسترس نیست.',
     };
   }
 }
 
-export default async function StoryDetail({ params }: Props) {
+
+export default async function StoryDetailPage({ params }: Props) {
   const { slug } = params;
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/stories/detail/${slug}/`, {
@@ -58,20 +94,31 @@ export default async function StoryDetail({ params }: Props) {
   const story: Story = await res.json();
 
   return (
-    <main className="flex flex-col gap-12 px-4 md:px-12 py-10">
+    <main className="flex flex-col gap-20 px-4 md:px-12 py-12 bg-base-light dark:bg-base-dark">
+      {/* Hero Section */}
       <HeroSection
-        title="مجموعه‌ی صراط"
+        title="استوری فرهنگی صراط"
         mainText={story.title}
-        subText="استوری برتر"
-        buttonTitle="استوری‌ها"
+        subText="لحظه‌ای کوتاه، پیامی عمیق"
+        buttonTitle="بازگشت به استوری‌ها"
         buttonIcon={<FaInstalod />}
         buttonPosition="right"
         buttonUrl="/stories"
+        buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 
-      <StoryBanner story={story} />
+      {/* Cultural Context */}
+      <section className="max-w-4xl mx-auto text-center space-y-6">
+        <h2 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark">
+          درباره این استوری
+        </h2>
+        <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
+          {story.description}
+        </p>
+      </section>
+
+      {/* Video Gallery */}
       <StoryVideoGallery story={story} />
-      <StoryDescription text={story.text || 'متنی برای این استوری ثبت نشده است.'} />
     </main>
   );
 }
