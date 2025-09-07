@@ -11,43 +11,75 @@ import { BsCollectionPlay } from "react-icons/bs";
 
 
 export const metadata: Metadata = {
-  title: 'نماهنگ ها',
-  description: 'نماهنگ های برتر گروه سرود صراط.',
+  title: 'نماهنگ‌های گروه سرود صراط | مجموعه ویدیویی فرهنگی',
+  description: 'در این صفحه می‌توانید مجموعه‌ای از نماهنگ‌های برتر گروه سرود صراط را مشاهده کنید. نماهنگ‌هایی با مضامین فرهنگی، مذهبی و اجتماعی برای تمام سنین.',
+  keywords: ['نماهنگ', 'گروه سرود', 'صراط', 'ویدیو فرهنگی', 'نماهنگ مذهبی', 'نماهنگ اجتماعی', 'کلیپ هنری'],
+  openGraph: {
+    title: 'نماهنگ‌های گروه سرود صراط',
+    description: 'مجموعه‌ای از نماهنگ‌های برتر با مضامین فرهنگی و مذهبی از گروه سرود صراط.',
+    url: 'https://serat.ir/cliparts',
+    siteName: 'گروه سرود صراط',
+    images: [
+      {
+        url: 'https://serat.ir/og-cliparts.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'نماهنگ‌های گروه سرود صراط',
+      },
+    ],
+    locale: 'fa_IR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'نماهنگ‌های گروه سرود صراط',
+    description: 'مجموعه‌ای از نماهنگ‌های فرهنگی و مذهبی برای تمام سنین.',
+    images: ['https://yourdomain.com/og-cliparts.jpg'],
+  },
 };
 
 
 
+export default async function ClipartsPage() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/cliparts/`, {
+    cache: 'no-store',
+  });
+  const cliparts: Clipart[] = await response.json();
 
-export default async function Cliparts() {
+  return (
+    <main className="flex flex-col gap-20 w-full px-6 py-12 bg-base-light dark:bg-base-dark">
+      {/* Hero */}
+      <HeroSection
+        title="مجموعه‌ی نماهنگ‌های صراط"
+        mainText="هنر، ایمان، همدلی"
+        subText="در این بخش، نماهنگ‌های فرهنگی و مذهبی گروه سرود صراط را مشاهده می‌کنید."
+        buttonTitle="مشاهده نماهنگ‌ها"
+        buttonIcon={<BsCollectionPlay />}
+        buttonPosition="right"
+        buttonUrl="/cliparts"
+      />
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/cliparts/`);
-    const cliparts: Clipart[] = await response.json();
+      {/* Intro Section */}
+      <section className="max-w-4xl mx-auto text-center space-y-6">
+        <h2 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">
+          چرا نماهنگ‌های صراط؟
+        </h2>
+        <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
+          نماهنگ‌های گروه صراط با هدف ترویج ارزش‌های فرهنگی، مذهبی و اجتماعی تولید شده‌اند. این آثار هنری با مشارکت نوجوانان و جوانان، بستری برای رشد هنری و معنوی فراهم می‌کنند.
+        </p>
+      </section>
 
-    return (
-        <main className="flex flex-col justify-between gap-16 h-auto w-full p-12">
-            {/* Hero */}
-            <HeroSection
-                title="مجموعه ی صراط"
-                mainText="گروه سرود صراط"
-                subText="به مجموعه ی صراط آمدید"
-                buttonTitle="نماهنگ ها"
-                buttonIcon={ <BsCollectionPlay /> }
-                buttonPosition="right"
-                buttonUrl="/cliparts"
-            />
-            {/* Slider */}
-            <section className="relative overflow-hidden w-full h-full flex flex-col justify-between gap-8">
-                <h2 className="text-3xl font-bold text-center my-5 bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark">نماهنگ های ما</h2>
-                <p className="text-lg text-wrap text-right text-main-text-light dark:text-main-text-dark mb-3 p-3">توضبحات مختصر و مفید.</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-y-7 gap-x-12">
-                    {cliparts.map(item => (
-                        <div key={item.slug}>
-                            {/* <div dangerouslySetInnerHTML={{ __html: item.text }} /> */}
-                            <ClipartCard {...item} />
-                        </div>
-                    ))}
-                </div>
-            </section>
-        </main>
-    );
+      {/* Clipart Grid */}
+      <section className="max-w-7xl mx-auto">
+        <h2 className="text-2xl font-bold text-center mb-8 text-main-text-light dark:text-main-text-dark">
+          مجموعه نماهنگ‌ها
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {cliparts.map((item) => (
+            <ClipartCard key={item.slug} {...item} />
+          ))}
+        </div>
+      </section>
+    </main>
+  );
 }

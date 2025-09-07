@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Clipart } from '@/types/clipart';
 import HeroSection from '@/components/HeroSection';
 import FamousCliparts from '@/components/FamousCliparts';
-import ClipartBanner from '@/components/ClipartBanner';
 import ClipartVideo from '@/components/ClipartVideo';
 import ClipartText from '@/components/ClipartText';
 
@@ -22,14 +21,43 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
     const clipart: Clipart = await res.json();
 
+    const pageTitle = `${clipart.title} | نماهنگ فرهنگی از گروه سرود صراط`;
+    const pageDescription = clipart.description || `نماهنگ "${clipart.title}" از مجموعه آثار فرهنگی گروه سرود صراط.`;
+
     return {
-      title: clipart.title,
-      description: clipart.description,
+      title: pageTitle,
+      description: pageDescription,
+      keywords: ['نماهنگ', 'گروه سرود', 'صراط', 'نماهنگ فرهنگی', 'نماهنگ مذهبی', clipart.title],
+      openGraph: {
+        title: pageTitle,
+        description: pageDescription,
+        url: `https://serat.ir/cliparts/${params.slug}`,
+        siteName: 'گروه سرود صراط',
+        images: [
+          {
+            url: `${process.env.NEXT_PUBLIC_MEDIA_URL}${clipart.poster}`,
+            width: 1200,
+            height: 630,
+            alt: clipart.title,
+          },
+        ],
+        locale: 'fa_IR',
+        type: 'video.other',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: pageTitle,
+        description: pageDescription,
+        images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${clipart.poster}`],
+      },
+      alternates: {
+        canonical: `https://serat.ir/cliparts/${params.slug}`,
+      },
     };
   } catch {
     return {
-      title: 'یافت نشد',
-      description: 'نماهنگ یافت نشده است. لطفاً صبر کنید.',
+      title: 'نماهنگ یافت نشد',
+      description: 'متأسفانه اطلاعات این نماهنگ در حال حاضر در دسترس نیست.',
     };
   }
 }
@@ -41,14 +69,40 @@ export default async function ClipartDetail({ params }: Props) {
   const clipart: Clipart = await res.json();
 
   return (
-    <main className="flex flex-col gap-12">
+    <main className="flex flex-col gap-20 w-full min-h-screen bg-base-light dark:bg-base-dark pb-20">
+      {/* Hero Section */}
+      <HeroSection
+        title="نماهنگ ویژه از گروه صراط"
+        mainText={clipart.title}
+        subText="در این بخش، نماهنگ‌های فرهنگی و مذهبی را با کیفیت بالا مشاهده می‌کنید."
+        buttonTitle="بازگشت به لیست نماهنگ‌ها"
+        buttonIcon={<BsCollectionPlay />}
+        buttonPosition="left"
+        buttonUrl="/cliparts"
+        buttonClasses="bg-primary-light dark:bg-primary-dark"
+      />
 
+      {/* Additional Section */}
+      <section className="max-w-4xl mx-auto px-4 text-center space-y-6">
+        <h2 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark">
+          درباره این نماهنگ
+        </h2>
+        <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
+          {clipart.description}
+        </p>
+      </section>
 
-      <ClipartBanner clipart={clipart} />
+      {/* Video */}
       <ClipartVideo video={clipart.video} />
+
+      {/* Text */}
       <ClipartText html={clipart.text || 'متنی برای این نماهنگ ثبت نشده است.'} />
 
-      <FamousCliparts />
+
+      <div className="mx-10">
+        {/* Famous Cliparts */}
+        <FamousCliparts />
+      </div>
     </main>
   );
 }
