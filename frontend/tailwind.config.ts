@@ -14,6 +14,9 @@ const config: Config = {
 
   theme: {
     extend: {
+      fontFamily: {
+        custom: ["custom-font"],
+      },
       colors: {
         // Dark theme colors
         'base-dark': '#242729',
