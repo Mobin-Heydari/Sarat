@@ -100,7 +100,7 @@ export default function FunnyContentSection({ content }: { content: ContentItem[
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-lg md:text-xl lg:text-2xl text-main-text-light dark:text-main-text-dark leading-relaxed tracking-wide mb-6"
+                    className="text-lg md:text-xl text-wrap lg:text-2xl text-main-text-light dark:text-main-text-dark leading-relaxed tracking-wide mb-6"
                   >
                     {item.content}
                   </motion.p>
