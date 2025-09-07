@@ -101,8 +101,6 @@ export default function MusicCard({
           </Link>
         </motion.div>
       </div>
-
-      <div className="absolute inset-0 pointer-events-none group-hover:ring-2 group-hover:ring-hover-light dark:group-hover:ring-hover-dark/30 rounded-2xl transition-all duration-300" />
     </motion.div>
   );
 }
