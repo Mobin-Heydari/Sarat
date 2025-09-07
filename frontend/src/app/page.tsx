@@ -1,5 +1,6 @@
 import { BsCollectionPlay } from "react-icons/bs";
 
+import Link from "next/link";
 
 import HeroSection from "@/components/HeroSection";
 import FamousCliparts from "@/components/FamousCliparts";
@@ -10,36 +11,91 @@ import ContactSection from "@/components/contact/ContactSection";
 
 
 
+export const metadata = {
+  title: 'صفحه اصلی گروه سرود صراط | نماهنگ، صوت، طنز و ارتباط با ما',
+  description:
+    'در صفحه اصلی گروه سرود صراط، مجموعه‌ای از نماهنگ‌های فرهنگی، صوت‌های مذهبی، لحظات طنز و راه‌های ارتباط با ما را خواهید یافت. با ما همراه شوید و از هنر، ایمان و همدلی لذت ببرید.',
+  keywords: [
+    'گروه سرود صراط',
+    'نماهنگ',
+    'صوت',
+    'طنز',
+    'شوخی',
+    'موسیقی مذهبی',
+    'محتوای فرهنگی',
+    'سرود',
+    'ارتباط با ما',
+    'صفحه اصلی',
+  ],
+  openGraph: {
+    title: 'صفحه اصلی گروه سرود صراط',
+    description:
+      'مجموعه‌ای از نماهنگ‌ها، صوت‌ها، لحظات طنز و راه‌های ارتباط با گروه سرود صراط. با ما همراه شوید.',
+    url: 'https://Serat.ir',
+    siteName: 'گروه سرود صراط',
+    images: [
+      {
+        url: 'https://Serat.ir/og-home.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'صفحه اصلی گروه سرود صراط',
+      },
+    ],
+    locale: 'fa_IR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'صفحه اصلی گروه سرود صراط',
+    description: 'هنر، ایمان، همدلی — همه در یک صفحه.',
+    images: ['https://Serat.ir/og-home.jpg'],
+  },
+};
+
 
 export default function Home() {
   return (
-    <main className="flex flex-col justify-between gap-20 h-auto w-full px-12 py-5">
-      {/* Hero */}
+    <main className="flex flex-col gap-20 w-full px-6 py-10 bg-base-light dark:bg-base-dark">
+      {/* Hero Section */}
       <HeroSection
-        title="مجموعه ی صراط"
-        mainText="گروه سرود صراط"
-        subText="به مجموعه ی صراط آمدید"
-        buttonTitle="نماهنگ ها"
-        buttonIcon={ <BsCollectionPlay /> }
+        title="گروه سرود صراط"
+        mainText="هنر، ایمان، همدلی"
+        subText="در این صفحه، مجموعه‌ای از آثار فرهنگی، صوت‌های مذهبی، لحظات طنز و راه‌های ارتباط با ما را خواهید یافت."
+        buttonTitle="مشاهده نماهنگ‌ها"
+        buttonIcon={<BsCollectionPlay />}
         buttonPosition="right"
         buttonUrl="/cliparts"
+        buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
-      {/* Slider */}
+
+      {/* Intro Section */}
+      <section className="max-w-4xl mx-auto text-center space-y-6">
+        <h2 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">
+          درباره مجموعه صراط
+        </h2>
+        <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
+          گروه سرود صراط با هدف ترویج ارزش‌های فرهنگی، مذهبی و اجتماعی از طریق هنر فعالیت می‌کند. آثار ما شامل نماهنگ‌های تصویری، صوت‌های شنیداری، لحظات طنز و محتوای الهام‌بخش برای تمام سنین است. ما باور داریم که هنر می‌تواند دل‌ها را به هم نزدیک‌تر کند.
+        </p>
+      </section>
+
+      {/* Cliparts Slider */}
       <section className="relative overflow-hidden w-full h-full pb-20 flex flex-col justify-between gap-12 mx-auto">
         <div className="flex justify-center flex-col md:flex-row items-center p-2">
-          <h2 className="text-4xl font-bold text-center bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark p-2">جدید ترین نماهنگ ها</h2>
+          <h2 className="text-4xl font-bold text-center bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark p-2">
+            جدیدترین نماهنگ‌ها
+          </h2>
         </div>
         <div dir="ltr">
           <ClipartsSlider />
         </div>
       </section>
 
+      {/* Famous Sections */}
       <FamousCliparts />
-
       <FamousMusicSection />
-
       <FunnyCardsContainer />
 
+      {/* Contact Section */}
       <ContactSection />
     </main>
   );
