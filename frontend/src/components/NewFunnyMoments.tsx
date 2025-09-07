@@ -92,8 +92,11 @@ export default function NewFunnyMoments() {
           <h2 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark">
            بامزه های اخیر
           </h2>
-          <Link href="/funny" className="text-xl font-bold  bg-base-light dark:bg-base-dark border-2 p-3 rounded-xl border-primary-light dark:border-primary-dark hover:text-highlight-text-light hover:bg-primary-light dark:hover:text-highlight-text-dark dark:hover:bg-primary-dark transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
-          مشاهده بیشتر
+          <Link
+            href="/funny"
+            className="text-base font-bold bg-base-light dark:bg-base-dark border-2 px-4 py-2 rounded-xl border-primary-light dark:border-primary-dark hover:text-highlight-text-light hover:bg-primary-light dark:hover:text-highlight-text-dark dark:hover:bg-primary-dark transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+          >
+            مشاهده بیشتر
           </Link>
         </motion.div>
 
