@@ -94,7 +94,7 @@ export default async function StoryDetailPage({ params }: Props) {
   const story: Story = await res.json();
 
   return (
-    <main className="flex flex-col gap-20 px-4 md:px-12 py-12 bg-base-light dark:bg-base-dark">
+    <main className="flex flex-col gap-20 bg-base-light dark:bg-base-dark">
       {/* Hero Section */}
       <HeroSection
         title="استوری فرهنگی صراط"

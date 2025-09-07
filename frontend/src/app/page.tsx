@@ -55,7 +55,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-20 w-full px-6 py-10 bg-base-light dark:bg-base-dark">
+    <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
       {/* Hero Section */}
       <HeroSection
         title="گروه سرود صراط"

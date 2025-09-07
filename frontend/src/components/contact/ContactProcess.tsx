@@ -41,6 +41,7 @@ export default function ContactProcess() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
+      className='mx-10'
     >
       {/* Title */}
       <motion.h2

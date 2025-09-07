@@ -36,6 +36,7 @@ export default function ContactInfo() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
+      className='mx-10'
     >
       <motion.h2
         initial={{ opacity: 0, y: 10 }}

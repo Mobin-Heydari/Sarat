@@ -57,7 +57,7 @@ export default async function Musics() {
   const items: Music[] = await response.json();
 
   return (
-    <main className="flex flex-col gap-20 w-full px-6 py-12 bg-base-light dark:bg-base-dark">
+    <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
       {/* Hero Section */}
       <HeroSection
         title="صوت‌های فرهنگی صراط"
@@ -81,7 +81,7 @@ export default async function Musics() {
       </section>
 
       {/* Music Grid */}
-      <section className="mx-auto">
+      <section className="mx-10">
         <h2 className="text-2xl font-bold text-center mb-8 text-main-text-light dark:text-main-text-dark">
           مجموعه صوت‌ها
         </h2>

@@ -8,7 +8,6 @@ import ContactTeam from '@/components/contact/ContactTeam';
 import { ContactForm } from '@/components/contact/ContactForm';
 import ContactFAQ from '@/components/contact/ContactFAQ';
 import ContactProcess from '@/components/contact/ContactProcess';
-import ContactLinks from '@/components/contact/ContactLinks';
 import ContactWall from '@/components/contact/ContactWall';
 
 export const metadata: Metadata = {
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function ContactUs() {
   return (
-    <main className="flex flex-col gap-16 px-4 md:px-12 py-10">
+    <main className="flex flex-col gap-16">
       <HeroSection
         title="تماس با ما"
         mainText="در ارتباط باشید"

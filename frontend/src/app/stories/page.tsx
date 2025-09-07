@@ -57,7 +57,7 @@ export default async function StoriesPage() {
   const stories: Story[] = await response.json();
 
   return (
-    <main className="flex flex-col gap-20 w-full px-6 py-12 bg-base-light dark:bg-base-dark">
+    <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
       {/* Hero Section */}
       <HeroSection
         title="استوری‌های فرهنگی صراط"

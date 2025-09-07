@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function AboutUs() {
   return (
-    <main className="flex flex-col gap-16 px-4 md:px-12 py-10">
+    <main className="flex flex-col gap-16">
       <HeroSection
         title="درباره‌ی گروه صراط"
         mainText="با ما بیشتر آشنا شوید"
