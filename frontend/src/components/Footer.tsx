@@ -37,10 +37,12 @@ const socialMedia = [
 
 const quickLinks = [
   { label: 'صفحه اصلی', href: '/' },
-  { label: 'درباره ما', href: '/about' },
+  { label: 'درباره ما', href: '/about-us' },
   { label: 'تماس با ما', href: '/contact-us' },
-  { label: 'عضویت در گروه', href: '/join' },
-  { label: 'رویدادها', href: '/events' },
+  { label: 'بامزه ها', href: '/join' },
+  { label: 'نماهنگ  ها', href: '/cliparts' },
+  { label: 'صوت ها', href: '/musics' },
+  { label: 'استوری ها', href: '/stories' },
 ];
 
 export function Footer() {
@@ -97,7 +99,7 @@ export function Footer() {
               transition: { duration: 0.6, delay: 0.4, staggerChildren: 0.1 },
             },
           }}
-          className="relative z-10 mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center"
+          className="relative z-10 mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-6 text-center"
         >
           {quickLinks.map((link) => (
             <motion.div
