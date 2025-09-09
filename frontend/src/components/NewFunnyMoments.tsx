@@ -81,7 +81,7 @@ export default function NewFunnyMoments() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariant}
-      className="bg-base-light dark:bg-base-dark"
+      className="bg-base-light dark:bg-base-dark mx-10"
     >
       <div className="mx-auto">
         {/* Section Header */}

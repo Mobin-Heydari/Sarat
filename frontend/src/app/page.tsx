@@ -78,18 +78,6 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Cliparts Slider */}
-      <section className="relative overflow-hidden w-full h-full pb-20 flex flex-col justify-between gap-12 mx-auto">
-        <div className="flex justify-center flex-col md:flex-row items-center p-2">
-          <h2 className="text-4xl font-bold text-center bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark p-2">
-            جدیدترین نماهنگ‌ها
-          </h2>
-        </div>
-        <div dir="ltr">
-          <ClipartsSlider />
-        </div>
-      </section>
-
       {/* Famous Sections */}
       <FamousCliparts />
       <FamousMusicSection />

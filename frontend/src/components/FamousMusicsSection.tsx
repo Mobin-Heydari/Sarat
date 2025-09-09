@@ -50,7 +50,7 @@ export default function FamousMusicSection() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
       variants={containerVariant}
-      className="flex flex-col gap-9 mx-auto "
+      className="flex flex-col gap-9 mx-10"
     >
       {/* Header */}
       <motion.div
