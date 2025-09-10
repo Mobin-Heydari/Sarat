@@ -4,10 +4,8 @@ import Link from "next/link";
 
 import HeroSection from "@/components/HeroSection";
 import FamousCliparts from "@/components/FamousCliparts";
-import ClipartsSlider from "@/components/ClipartsSlider";
-import FunnyCardsContainer from "@/components/NewFunnyMoments";
 import FamousMusicSection from "@/components/FamousMusicsSection";
-import ContactSection from "@/components/contact/ContactSection";
+import { ContactForm } from "@/components/contact/ContactForm";
 
 
 
@@ -81,10 +79,9 @@ export default function Home() {
       {/* Famous Sections */}
       <FamousCliparts />
       <FamousMusicSection />
-      <FunnyCardsContainer />
 
       {/* Contact Section */}
-      <ContactSection />
+      <ContactForm />
     </main>
   );
 }
