@@ -28,28 +28,27 @@ export const FloatingNav = ({
 }) => {
   const pathname = usePathname();
   const { scrollYProgress } = useScroll();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  // show/hide on scroll
+  // show/hide nav: always show near top or on scroll-up
   useMotionValueEvent(scrollYProgress, "change", (curr) => {
     const prev = scrollYProgress.getPrevious() ?? 0;
-    setVisible(curr >= 0.05 && curr < prev);
+    const scrollingUp = prev > curr;
+    const nearTop = curr <= 0.05;
+    setVisible(nearTop || scrollingUp);
   });
 
   // close sidebar on ESC / click outside
   const onKey = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") setSidebarOpen(false);
   }, []);
-  const onClickOutside = useCallback(
-    (e: MouseEvent) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(e.target as Node)) {
-        setSidebarOpen(false);
-      }
-    },
-    []
-  );
+  const onClickOutside = useCallback((e: MouseEvent) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(e.target as Node)) {
+      setSidebarOpen(false);
+    }
+  }, []);
   useEffect(() => {
     if (sidebarOpen) {
       document.addEventListener("keydown", onKey);
@@ -64,76 +63,83 @@ export const FloatingNav = ({
   return (
     <>
       <AnimatePresence>
-        <motion.nav
-          dir="rtl"
-          initial={{ opacity: 1, y: -120 }}
-          animate={{ y: visible ? 0 : -120, opacity: visible ? 1 : 0 }}
-          exit={{ opacity: 0, y: -120 }}
-          transition={{ duration: 0.3 }}
-          className={cn(
-            "fixed inset-x-0 top-0 z-[5000] px-6 py-4 backdrop-blur-md h-20",
-            "bg-base-light/70 dark:bg-base-dark/70",
-            className
-          )}
-        >
-          {/* Mobile */}
-          <div className="flex md:hidden items-center justify-between">
-            <button
-              onClick={() => setSidebarOpen(true)}
-              aria-label="باز کردن منو"
-              className="text-2xl text-main-text-light dark:text-main-text-dark"
-            >
-              <HiMenu />
-            </button>
+        {visible && (
+          <motion.nav
+            dir="rtl"
+            initial={{ y: -120, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -120, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className={cn(
+              "fixed inset-x-0 top-0 z-[5000] h-20 px-6 py-4 backdrop-blur-md",
+              "bg-base-light/70 dark:bg-base-dark/70",
+              className
+            )}
+          >
+            {/* Mobile */}
+            <div className="flex md:hidden items-center justify-between h-full">
+              <button
+                onClick={() => setSidebarOpen(true)}
+                aria-label="باز کردن منو"
+                className="text-2xl text-main-text-light dark:text-main-text-dark"
+              >
+                <HiMenu />
+              </button>
 
-            <Image src="/logo.png" alt="لوگو" width={80} height={80} />
+              <Image src="/logo.png" alt="لوگو" width={40} height={40} />
 
-            <ThemeSwitcher />
-          </div>
-
-          {/* Desktop */}
-          <div className="hidden md:flex items-center justify-between h-full">
-            {/* Left: Logo */}
-            <div className="w-1/3 flex justify-start">
-              <Image src="/logo.png" alt="لوگو" width={80} height={80} />
-            </div>
-
-            {/* Center: Nav Links */}
-            <div className="w-1/3 flex justify-center gap-10">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "relative text-lg font-semibold transition-colors duration-200",
-                      isActive
-                        ? "text-primary-light dark:text-primary-dark"
-                        : "text-main-text-light hover:text-hover-light dark:text-main-text-dark dark:hover:text-hover-dark"
-                    )}
-                  >
-                    {item.name}
-                    <span
-                      className={cn(
-                        "absolute left-0 -bottom-1 h-1",
-                        isActive
-                          ? "w-full bg-primary-light dark:bg-primary-dark scale-x-100"
-                          : "w-full bg-primary-light dark:bg-primary-dark scale-x-0 hover:scale-x-100",
-                        "origin-left transition-transform duration-200"
-                      )}
-                    />
-                  </Link>
-                );
-              })}
-            </div>
-
-            {/* Right: Theme Switcher */}
-            <div className="w-1/3 flex justify-end">
               <ThemeSwitcher />
             </div>
-          </div>
-        </motion.nav>
+
+            {/* Desktop */}
+            <div className="hidden md:flex items-center justify-between h-full">
+              {/* Left: Logo */}
+              <div className="w-1/3 flex justify-start">
+                <Image src="/logo.png" alt="لوگو" width={56} height={56} />
+              </div>
+
+              {/* Center: Links */}
+              <div className="w-1/3 flex justify-center gap-10">
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "relative text-lg font-semibold transition-colors duration-200",
+                        isActive
+                          ? "text-primary-light dark:text-primary-dark"
+                          : "text-main-text-light hover:text-hover-light dark:text-main-text-dark dark:hover:text-hover-dark"
+                      )}
+                    >
+                      {item.name}
+                      <span
+                        className={cn(
+                          "absolute left-0 -bottom-1 h-1 bg-primary-light dark:bg-primary-dark origin-left transition-transform duration-200",
+                          isActive
+                            ? "w-full scale-x-100"
+                            : "w-full scale-x-0 hover:scale-x-100"
+                        )}
+                      />
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Right: Invite + Theme */}
+              <div className="w-1/3 flex justify-end items-center gap-6">
+                <Link
+                  href="/contact-us"
+                  className="px-4 py-2 rounded-lg font-semibold transition-colors duration-200 bg-primary-light text-base-light hover:bg-hover-light dark:bg-primary-dark dark:text-base-dark dark:hover:bg-hover-dark"
+                >
+                  دعوت گروه
+                </Link>
+                <ThemeSwitcher />
+              </div>
+            </div>
+          </motion.nav>
+        )}
       </AnimatePresence>
 
       {/* Sidebar + Backdrop */}
@@ -158,7 +164,7 @@ export const FloatingNav = ({
               className="fixed top-0 right-0 h-full w-72 p-8 bg-base-light dark:bg-base-dark shadow-2xl z-[6000] overflow-y-auto"
             >
               <div className="flex items-center justify-between mb-8">
-                <Image src="/logo.png" alt="لوگو" width={80} height={80} />
+                <Image src="/logo.png" alt="لوگو" width={40} height={40} />
                 <button
                   onClick={() => setSidebarOpen(false)}
                   aria-label="بستن منو"
@@ -168,7 +174,7 @@ export const FloatingNav = ({
                   <HiX />
                 </button>
               </div>
-              <nav className="flex flex-col gap-6">
+              <nav className="flex flex-col gap-6 mb-6">
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (
@@ -188,6 +194,13 @@ export const FloatingNav = ({
                   );
                 })}
               </nav>
+              <Link
+                href="/contact-us"
+                onClick={() => setSidebarOpen(false)}
+                className="block text-center px-4 py-3 rounded-lg font-semibold bg-primary-light text-base-light hover:bg-hover-light dark:bg-primary-dark dark:text-base-dark dark:hover:bg-hover-dark"
+              >
+                دعوت از گروه
+              </Link>
             </motion.aside>
           </>
         )}
