@@ -86,7 +86,7 @@ export const FloatingNav = ({
               <HiMenu />
             </button>
 
-            <Image src="/logo.png" alt="لوگو" width={40} height={40} />
+            <Image src="/logo.png" alt="لوگو" width={80} height={80} />
 
             <ThemeSwitcher />
           </div>
@@ -95,7 +95,7 @@ export const FloatingNav = ({
           <div className="hidden md:flex items-center justify-between h-full">
             {/* Left: Logo */}
             <div className="w-1/3 flex justify-start">
-              <Image src="/logo.png" alt="لوگو" width={56} height={56} />
+              <Image src="/logo.png" alt="لوگو" width={80} height={80} />
             </div>
 
             {/* Center: Nav Links */}
@@ -158,7 +158,7 @@ export const FloatingNav = ({
               className="fixed top-0 right-0 h-full w-72 p-8 bg-base-light dark:bg-base-dark shadow-2xl z-[6000] overflow-y-auto"
             >
               <div className="flex items-center justify-between mb-8">
-                <Image src="/logo.png" alt="لوگو" width={40} height={40} />
+                <Image src="/logo.png" alt="لوگو" width={80} height={80} />
                 <button
                   onClick={() => setSidebarOpen(false)}
                   aria-label="بستن منو"
