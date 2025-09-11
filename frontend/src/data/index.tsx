@@ -75,3 +75,21 @@ export const aboutData = [
       "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
+
+export const banners = [
+  {
+    image: "/logo.png",
+    title: "کشف ناشناخته‌ها",
+    subtitle: "به دنیایی از شگفتی و کشف قدم بگذارید.",
+  },
+  {
+    image: "/logo.png",
+    title: "طراحی آینده‌ات",
+    subtitle: "تجربه‌هایی بساز که دل‌ها را تکان دهد.",
+  },
+  {
+    image: "/logo.png",
+    title: "با هدف بساز",
+    subtitle: "کدی بنویس که توان‌بخش باشد و سیستم‌هایی خلق کن که ماندگار باشند.",
+  },
+];

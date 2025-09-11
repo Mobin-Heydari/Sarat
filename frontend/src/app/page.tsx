@@ -6,8 +6,9 @@ import HeroSection from "@/components/HeroSection";
 import FamousCliparts from "@/components/FamousCliparts";
 import FamousMusicSection from "@/components/FamousMusicsSection";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { BannerSlider } from "@/components/ui/BannerSlider";
 
-
+import { banners } from "@/data";
 
 export const metadata = {
   title: 'صفحه اصلی گروه سرود صراط | نماهنگ، صوت، طنز و ارتباط با ما',
@@ -54,6 +55,8 @@ export const metadata = {
 export default function Home() {
   return (
     <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
+
+      <BannerSlider className="h-[40rem]" banners={banners} direction="down" />
       {/* Hero Section */}
       <HeroSection
         title="گروه سرود صراط"
