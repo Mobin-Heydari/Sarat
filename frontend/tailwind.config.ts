@@ -15,7 +15,10 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        custom: ["custom-font"],
+        lalezar: ["lalezar"],
+        custom: ["custom"],
+        vazir: ["vazir"],
+        samim: ["samim"],
       },
       colors: {
         // Dark theme colors

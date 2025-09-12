@@ -70,7 +70,7 @@ export default async function RootLayout({
         <link rel="icon" href="/logo.png" sizes="64x64" type="image/png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className="dark:bg-base-dark bg-base-light font-custom flex flex-col justify-between gap-6">
+      <body className="dark:bg-base-dark bg-base-light font-samim font-bold flex flex-col justify-between gap-6">
         <Theme>
           <header>
             <Navbar />

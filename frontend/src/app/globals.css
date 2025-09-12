@@ -18,8 +18,19 @@
 
 
 @font-face {
-  font-family: 'custom-font';
-  src: url('/fonts/custom.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+  font-family: 'custom';
+  src: url('/fonts/custom.ttf') format('truetype');
+}
+
+@font-face {
+  font-family:'lalezar';
+  src: url(/fonts/lalezar.ttf) format('truetype');
+}
+@font-face {
+  font-family:'vazir';
+  src: url(/fonts/vazir.ttf) format('truetype');
+}
+@font-face {
+  font-family:'samim';
+  src: url(/fonts/samim.ttf) format('truetype');
 }
