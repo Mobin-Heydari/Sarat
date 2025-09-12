@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Stories.apps.StoriesConfig',
     'Audios.apps.AudiosConfig',
     'Funny.apps.FunnyConfig',
+    'Lives.apps.LivesConfig',
 ]
 
 MIDDLEWARE = [
