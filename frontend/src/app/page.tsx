@@ -9,6 +9,7 @@ import { ContactForm } from "@/components/contact/ContactForm";
 import { BannerSlider } from "@/components/ui/BannerSlider";
 
 import { banners } from "@/data";
+import NewShowsSlider from "@/components/shows/FamousShowSlider";
 
 export const metadata = {
   title: 'صفحه اصلی گروه سرود صراط | نماهنگ، صوت، طنز و ارتباط با ما',
@@ -80,6 +81,7 @@ export default function Home() {
       </section>
 
       {/* Famous Sections */}
+      <NewShowsSlider />
       <FamousCliparts />
       <FamousMusicSection />
 

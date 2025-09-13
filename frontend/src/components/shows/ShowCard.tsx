@@ -42,7 +42,7 @@ export default function ShowCard({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className="bg-base-light dark:bg-base-dark rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col group"
+      className="bg-base-light dark:bg-base-dark rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col group mb-12"
     >
       <Link
         href={`/shows/${slug}`}
