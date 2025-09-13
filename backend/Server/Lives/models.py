@@ -11,7 +11,9 @@ class Show(models.Model):
     poster = models.ImageField(verbose_name="پوستر", upload_to="Show/posters/")
     video = models.URLField(verbose_name="آدرس ویدیو")
 
-    text = RichTextField(verbose_name="متن نماهنگ")
+    description = models.TextField(verbose_name="متن")
+
+    text = RichTextField(verbose_name="تکست")
 
     views = models.IntegerField(default=0)
 
