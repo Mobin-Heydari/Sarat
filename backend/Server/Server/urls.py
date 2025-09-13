@@ -13,4 +13,5 @@ urlpatterns = [
     path('stories/', include('Stories.urls', namespace="Stories")),
     path('audios/', include('Audios.urls', namespace="Audios")),
     path('funny/', include('Funny.urls', namespace="Funny")),
+    path('lives/', include('Lives.urls', namespace="Lives")),
 ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
