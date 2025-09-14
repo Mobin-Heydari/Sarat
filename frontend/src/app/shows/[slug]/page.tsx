@@ -16,7 +16,53 @@ type Props = {
 
 export const dynamic = 'force-dynamic';
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/lives/shows/detail/${params.slug}/`, {
+      cache: 'no-store',
+    });
+    const show: Show = await res.json();
 
+    const pageTitle = `${show.title} | اجرای فرهنگی از گروه سرود صراط`;
+    const pageDescription = show.description || `اجرای "${show.title}" از مجموعه آثار فرهنگی گروه سرود صراط.`;
+
+    return {
+      title: pageTitle,
+      description: pageDescription,
+      keywords: ['اجرا', 'گروه سرود', 'صراط', 'اجرای فرهنگی', 'اجرای مذهبی', show.title],
+      openGraph: {
+        title: pageTitle,
+        description: pageDescription,
+        url: `https://serat.ir/shows/${params.slug}`,
+        siteName: 'گروه سرود صراط',
+        images: [
+          {
+            url: `${process.env.NEXT_PUBLIC_MEDIA_URL}${show.poster}`,
+            width: 1200,
+            height: 630,
+            alt: show.title,
+          },
+        ],
+        locale: 'fa_IR',
+        type: 'video.other',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: pageTitle,
+        description: pageDescription,
+        images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${show.poster}`],
+      },
+      alternates: {
+        canonical: `https://serat.ir/shows/${params.slug}`,
+      },
+    };
+  } catch {
+    return {
+      title: 'اجرای مورد نظر یافت نشد',
+      description: 'متأسفانه اطلاعات این اجرا در حال حاضر در دسترس نیست.',
+    };
+  }
+}
 
 export default async function ShowDetail({ params }: Props) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/lives/shows/detail/${params.slug}/`, {
