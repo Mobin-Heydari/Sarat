@@ -1,9 +1,15 @@
 
 import type { Metadata } from "next";
+
 import "./globals.css";
+
+
 import Theme from "@/providers/ThemeProvider";
-import Navbar from "@/components/Navbar";
+import { Navbar } from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+
+import { navItems } from "@/data";
 
 
 
@@ -73,7 +79,7 @@ export default async function RootLayout({
       <body className="dark:bg-base-dark bg-base-light font-samim font-bold flex flex-col justify-between gap-6">
         <Theme>
           <header>
-            <Navbar />
+            <Navbar navItems={navItems} />
           </header>
           <main>{children}</main>
           <footer>

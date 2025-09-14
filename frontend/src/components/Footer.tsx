@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { navItems } from '@/data';
 
 const socialMedia = [
   {
@@ -35,15 +36,6 @@ const socialMedia = [
   },
 ];
 
-const quickLinks = [
-  { label: 'صفحه اصلی', href: '/' },
-  { label: 'درباره ما', href: '/about-us' },
-  { label: 'تماس با ما', href: '/contact-us' },
-  { label: 'بامزه ها', href: '/join' },
-  { label: 'نماهنگ  ها', href: '/cliparts' },
-  { label: 'صوت ها', href: '/musics' },
-  { label: 'استوری ها', href: '/stories' },
-];
 
 export function Footer() {
   return (
@@ -101,7 +93,7 @@ export function Footer() {
           }}
           className="relative z-10 mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-6 text-center"
         >
-          {quickLinks.map((link) => (
+          {navItems.map((link) => (
             <motion.div
               key={link.href}
               variants={{
@@ -113,7 +105,7 @@ export function Footer() {
                 href={link.href}
                 className="text-sm font-medium text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark transition-all"
               >
-                {link.label}
+                {link.name}
               </Link>
             </motion.div>
           ))}
