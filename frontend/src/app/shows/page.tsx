@@ -5,6 +5,48 @@ import { FaAngleLeft } from 'react-icons/fa6';
 
 
 
+export const metadata = {
+  title: 'لیست اجراهای صراط | تئاتر، موسیقی، کمدی و اجراهای فرهنگی',
+  description:
+    'در صفحه اجراهای گروه صراط، مجموعه‌ای از اجراهای زنده، تئاترهای فرهنگی، موسیقی‌های محلی و لحظات هنری را مرور کنید. با ما همراه شوید و اجراهای خودتان را ثبت کنید!',
+  keywords: [
+    'اجرا',
+    'تئاتر',
+    'موسیقی',
+    'کمدی',
+    'صراط',
+    'گروه سرود',
+    'اجراهای فرهنگی',
+    'نمایش زنده',
+    'هنر ایرانی',
+    'ثبت اجرا',
+  ],
+  openGraph: {
+    title: 'لیست اجراهای صراط',
+    description:
+      'مروری بر اجراهای زنده، تئاترهای فرهنگی، موسیقی‌های محلی و لحظات هنری گروه صراط.',
+    url: 'https://Serat.ir/shows',
+    siteName: 'گروه سرود صراط',
+    images: [
+      {
+        url: 'https://Serat.ir/og-shows.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'لیست اجراهای صراط',
+      },
+    ],
+    locale: 'fa_IR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'لیست اجراهای صراط',
+    description: 'اجراهایی که دل‌ها رو به هم نزدیک‌تر می‌کنن — با ما همراه شوید!',
+    images: ['https://Serat.ir/og-shows.jpg'],
+  },
+};
+
+
 
 export default async function ShowsListPage() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/lives/shows/`, {
