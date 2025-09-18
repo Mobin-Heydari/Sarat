@@ -19,7 +19,7 @@ export default function ThemeSwitcher() {
     if (resolvedTheme === 'dark') {
         return(
             <div className="cursor-pointer">
-                <FiSun onClick={() => setTheme('light')} className="text-main-text-light hover:text-main-text-light/[0.7] dark:text-main-text-dark dark:hover:text-main-text-dark/[0.5]"/>
+                <FiSun onClick={() => setTheme('light')} className="text-main-text-light hover:text-main-text-light/[0.7] dark:text-main-text-dark dark:hover:text-main-text-dark/[0.5] text-2xl"/>
             </div>
         ) 
     }
@@ -27,7 +27,7 @@ export default function ThemeSwitcher() {
     if (resolvedTheme === 'light') {
         return (
             <div className="cursor-pointer">
-                <FiMoon onClick={() => setTheme('dark')} className="text-main-text-light hover:text-main-text-light/[0.7] dark:text-main-text-dark dark:hover:text-main-text-dark/[0.5]"/>
+                <FiMoon onClick={() => setTheme('dark')} className="text-main-text-light hover:text-main-text-light/[0.7] dark:text-main-text-dark dark:hover:text-main-text-dark/[0.5] text-2xl"/>
             </div>
         )
     }
