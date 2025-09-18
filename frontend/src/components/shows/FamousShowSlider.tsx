@@ -2,14 +2,9 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
-
-// 1. Swiper React + Slides
 import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
-
-// 2. Swiper Modules from the correct path
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 
-// 3. Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -21,8 +16,7 @@ import ShowCard from './ShowCard';
 import { Undo2, Redo2 } from 'lucide-react';
 import Link from 'next/link';
 
-// 4. Framer Motion variant
-const fadeInUp : Variants = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -46,13 +40,10 @@ const containerVariant: Variants = {
 };
 
 export default function FamousShowsSlider() {
-  // 5. State for fetched shows
   const [shows, setShows] = useState<Show[]>([]);
-  // 6. Refs for custom navigation buttons
   const prevBtnRef = useRef<HTMLButtonElement>(null);
   const nextBtnRef = useRef<HTMLButtonElement>(null);
 
-  // 7. Fetch data on mount
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/lives/shows/famous-shows/`)
       .then((res) => res.json())
@@ -67,7 +58,7 @@ export default function FamousShowsSlider() {
       whileInView="visible"
       viewport={{ once: true }}
       dir="rtl"
-      className="flex flex-col justify-between mt-10 gap-6 mx-10"
+      className="relative flex flex-col justify-between mt-10 gap-6 mx-4 lg:mx-10"
     >
       {/* Header */}
       <motion.div
@@ -84,61 +75,57 @@ export default function FamousShowsSlider() {
           مشاهده بیشتر
         </Link>
       </motion.div>
-      {/* Sidebar + Slider Wrapper */}
-      <div className="flex items-center mb-10 lg:gap-3">
-        {/* Sidebar Nav (lg+) */}
-        <div className="w-[150px] hidden lg:flex flex-col items-center justify-center p-1.5 min-h-[380px] bg-primary-light dark:bg-primary-dark rounded-r-2xl">
-          <p className="mt-4 text-2xl text-white text-center leading-10">برترین نمایش‌ها</p>
 
-          <div className="mt-6 flex flex-col-reverse items-center gap-3">
-            <button
-              ref={prevBtnRef}
-              aria-label="قبلی"
-              className="bg-white text-primary-light dark:text-primary-dark font-bold py-2 px-6 rounded-full transition-colors duration-300"
-            >
-              <Undo2 size={20} />
-            </button>
-            <button
-              ref={nextBtnRef}
-              aria-label="بعدی"
-              className="bg-white text-primary-light dark:text-primary-dark font-bold py-2 px-6 rounded-full transition-colors duration-300"
-            >
-              <Redo2 size={20} />
-            </button>
-          </div>
-        </div>
+      {/* Slider Container */}
+      <div className="relative w-full">
+        {/* Left Button */}
+        <button
+          ref={prevBtnRef}
+          aria-label="قبلی"
+          className="absolute top-1/2 -translate-y-1/2 left-2 z-10 bg-white dark:bg-dark-bg border border-primary-light dark:border-primary-dark text-primary-light dark:text-primary-dark p-3 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+        >
+          <Undo2 size={24} />
+        </button>
+
+        {/* Right Button */}
+        <button
+          ref={nextBtnRef}
+          aria-label="بعدی"
+          className="absolute top-1/2 -translate-y-1/2 right-2 z-10 bg-white dark:bg-dark-bg border border-primary-light dark:border-primary-dark text-primary-light dark:text-primary-dark p-3 rounded-full shadow-lg hover:scale-110 transition-all duration-300"
+        >
+          <Redo2 size={24} />
+        </button>
 
         {/* Swiper Slider */}
         <SwiperReact
-          // 8. Hook up custom buttons via onBeforeInit
           onBeforeInit={(swiper) => {
-            // @ts-ignore: attach our refs
+            // @ts-ignore
             swiper.params.navigation.prevEl = prevBtnRef.current;
             // @ts-ignore
             swiper.params.navigation.nextEl = nextBtnRef.current;
           }}
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-          loop={true}
+          loop
           autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          a11y={true}
+          a11y
           spaceBetween={16}
           breakpoints={{
-            0:    { slidesPerView: 1 },
-            640:  { slidesPerView: 2 },
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
             1280: { slidesPerView: 3 },
           }}
-          className="w-full min-h-[380px] flex-1"
+          className="w-full min-h-[380px]"
           dir="rtl"
           style={{
-            '--swiper-pagination-color': 'var(--primary-light)',                     // active bullet color
-            '--swiper-pagination-bullet-inactive-color': 'var(--highlight-text-light)',  
-            '--swiper-pagination-bullet-size': '0.75rem',                             // bullet diameter
-            '--swiper-pagination-bullet-opacity': '1',                                // bullets always fully opaque
-            '--swiper-scrollbar-width': '4px',                                        // thickness of scrollbar
-            '--swiper-scrollbar-color': 'var(--primary-light)',                       // drag thumb color
+            '--swiper-pagination-color': 'var(--primary-light)',
+            '--swiper-pagination-bullet-inactive-color': 'var(--highlight-text-light)',
+            '--swiper-pagination-bullet-size': '0.75rem',
+            '--swiper-pagination-bullet-opacity': '1',
+            '--swiper-scrollbar-width': '4px',
+            '--swiper-scrollbar-color': 'var(--primary-light)',
           } as React.CSSProperties}
         >
           {shows.map((show) => (
