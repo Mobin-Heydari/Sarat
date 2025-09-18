@@ -1,13 +1,40 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+
 import { Input } from '../ui/Input';
 import { Label } from '../ui/Label';
 import { FileUpload } from '../ui/FileUpload';
-import { cn } from '@/lib/utils';
 import { Textarea } from '../ui/Textarea';
-import { FaPhoneAlt } from 'react-icons/fa';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+
+
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.42, 0, 0.58, 1] },
+  },
+};
+
+const containerVariant: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.42, 0, 0.58, 1],
+      when: 'beforeChildren',
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+
 
 async function getPublicIP() {
   try {
@@ -26,9 +53,7 @@ export function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({});
   const [fileUploadKey, setFileUploadKey] = useState<number>(0);
 
-  const handleFileChange = (files: File[]) => {
-    setAttachedFiles(files);
-  };
+  const handleFileChange = (files: File[]) => setAttachedFiles(files);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,9 +87,7 @@ export function ContactForm() {
     const ip_address = await getPublicIP();
     formData.append('ip_address', ip_address);
 
-    attachedFiles.forEach((file) => {
-      formData.append('attachment', file);
-    });
+    attachedFiles.forEach((file) => formData.append('attachment', file));
 
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/contacts/create/`, {
@@ -91,139 +114,146 @@ export function ContactForm() {
     } catch {
       setButtonMessage('مشکلی به وجود آمد');
       setIsSubmitting(false);
-      setTimeout(() => {
-        setButtonMessage('ارسال');
-      }, 4000);
+      setTimeout(() => setButtonMessage('ارسال'), 4000);
     }
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="flex flex-col justify-center gap-8 w-full max-w-2xl mx-auto border border-primary-light dark:border-primary-dark rounded-2xl p-8 bg-white/30 dark:bg-black/30 backdrop-blur-md shadow-xl"
+    <motion.section
+      variants={fadeInUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      dir="rtl"
+      className="relative flex flex-col justify-between mt-10 gap-6 mx-4 lg:mx-10"
     >
+      {/* Header */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
-        className="flex flex-col gap-6"
+        variants={containerVariant}
+        className="flex flex-col md:flex-row justify-between items-center gap-y-6"
       >
-        <div className="text-center">
-          <h4 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">اطلاعات تماس</h4>
-          <p className="text-sm text-main-text-light dark:text-main-text-dark mt-2">
-            شما می‌توانید با پر کردن فرم تماس با ما، درخواست‌ها و نظرات خود را با ما به اشتراک بگذارید.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-4 justify-center">
-          <FaPhoneAlt className="text-2xl text-primary-light dark:text-primary-dark" />
-          <div className="flex flex-col gap-1">
-            <span className="text-lg font-bold text-main-text-light dark:text-main-text-dark">تلفن:</span>
-            <p className="text-sm text-main-text-light/[0.7] dark:text-main-text-dark/[0.7]">0912-000-0000</p>
-          </div>
-        </div>
+        <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark">
+          فرم ارتباط با ما
+        </h2>
+        <Link
+          href="/contact-us"
+          className="text-base font-bold bg-base-light dark:bg-base-dark border-2 px-4 py-2 rounded-xl border-primary-light dark:border-primary-dark hover:text-highlight-text-light hover:bg-primary-light dark:hover:text-highlight-text-dark dark:hover:bg-primary-dark transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105"
+        >
+          اطلاعات بیشتر
+        </Link>
       </motion.div>
 
-      <motion.form
-        onSubmit={handleSubmit}
-        role="form"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-        className="space-y-6"
+      {/* Form Container */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={{
+          hidden: { opacity: 0, y: 40 },
+          visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+        }}
+        className="flex flex-col justify-center gap-8 w-full max-w-2xl mx-auto border border-primary-light dark:border-primary-dark rounded-2xl p-8 bg-white/30 dark:bg-black/30 backdrop-blur-md shadow-xl"
       >
-        {[
-          { id: 'f_name', label: 'نام', placeholder: 'مبین', error: fieldErrors.f_name },
-          { id: 'l_name', label: 'نام خانوادگی', placeholder: 'حیدری', error: fieldErrors.l_name },
-        ].map((field, i) => (
+        <motion.form
+          onSubmit={handleSubmit}
+          role="form"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { delay: 0.3, duration: 0.6 } },
+          }}
+          className="space-y-6"
+        >
+          {/* 👥 Name Fields */}
           <motion.div
-            key={field.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.2, duration: 0.5 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             <LabelInputContainer>
-              <Label htmlFor={field.id}>{field.label}</Label>
-              <Input
-                id={field.id}
-                name={field.id}
-                placeholder={field.placeholder}
-                type="text"
-                aria-label={field.label}
-                className="rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark transition-all"
-              />
-              {field.error && <p className="text-red-500 text-xs mt-1">{field.error}</p>}
+              <Label htmlFor="f_name">نام</Label>
+              <Input id="f_name" name="f_name" placeholder="مبین" type="text" />
+              {fieldErrors.f_name && <p className="text-red-500 text-xs mt-1">{fieldErrors.f_name}</p>}
+            </LabelInputContainer>
+
+            <LabelInputContainer>
+              <Label htmlFor="l_name">نام خانوادگی</Label>
+              <Input id="l_name" name="l_name" placeholder="حیدری" type="text" />
+              {fieldErrors.l_name && <p className="text-red-500 text-xs mt-1">{fieldErrors.l_name}</p>}
             </LabelInputContainer>
           </motion.div>
-        ))}
 
-        <LabelInputContainer>
-          <Label htmlFor="phone">شماره تلفن</Label>
-          <Input
-            id="phone"
-            name="phone"
-            placeholder="0910-207-2859"
-            type="tel"
-            aria-label="شماره تلفن"
-            className="rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark transition-all"
-          />
-        </LabelInputContainer>
+          {/* 📞 Phone & Title */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <LabelInputContainer>
+              <Label htmlFor="phone">شماره تلفن</Label>
+              <Input id="phone" name="phone" placeholder="0910-207-2859" type="tel" />
+              {fieldErrors.phone && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
+            </LabelInputContainer>
 
-        <LabelInputContainer>
-          <Label htmlFor="title">عنوان</Label>
-          <Input
-            id="title"
-            name="title"
-            placeholder="عنوان پیام"
-            type="text"
-            aria-label="عنوان"
-            className="rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark transition-all"
-          />
-          {fieldErrors.title && <p className="text-red-500 text-xs mt-1">{fieldErrors.title}</p>}
-        </LabelInputContainer>
+            <LabelInputContainer>
+              <Label htmlFor="title">عنوان</Label>
+              <Input id="title" name="title" placeholder="عنوان پیام" type="text" />
+              {fieldErrors.title && <p className="text-red-500 text-xs mt-1">{fieldErrors.title}</p>}
+            </LabelInputContainer>
+          </motion.div>
 
-        <LabelInputContainer>
-          <Label htmlFor="content">پیام</Label>
-          <Textarea
-            id="content"
-            name="content"
-            placeholder="پیام شما..."
-            aria-label="پیام"
-            className="rounded-md border border-gray-300 dark:border-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark transition-all"
-          />
-        </LabelInputContainer>
+          {/* 📝 Message */}
+          <LabelInputContainer>
+            <Label htmlFor="content">پیام</Label>
+            <Textarea id="content" name="content" placeholder="پیام شما..." />
+          </LabelInputContainer>
 
-        <FileUpload key={fileUploadKey} onChange={handleFileChange} />
+          {/* 📎 File Upload */}
+          <FileUpload key={fileUploadKey} onChange={handleFileChange} />
 
-        <motion.button
-          type="submit"
-          disabled={isSubmitting}
-          whileTap={{ scale: 0.95 }}
-          whileHover={{ scale: 1.02 }}
-          className="relative block h-12 w-full rounded-full bg-gradient-to-r from-primary-light via-success-light to-selected-light dark:from-primary-dark dark:via-success-dark dark:to-selected-dark text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300"
-        >
-          {buttonMessage}
-          <BottomGradient />
-        </motion.button>
+          {/* 🚀 Submit Button */}
+          <motion.button
+            type="submit"
+            disabled={isSubmitting}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            className="relative block h-12 w-full rounded-full bg-gradient-to-r from-primary-light via-success-light to-selected-light dark:from-primary-dark dark:via-success-dark dark:to-selected-dark text-white font-bold shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            {buttonMessage}
+            <BottomGradient />
+          </motion.button>
 
-        <AnimatePresence>
-          {buttonMessage === 'پیام ارسال شد 🎉' && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.5 }}
-              className="text-green-600 text-center font-bold mt-4"
-            >
-              پیام شما با موفقیت ارسال شد 🎉
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.form>
-    </motion.div>
+          {/* ✅ Success Message */}
+          <AnimatePresence>
+            {buttonMessage === 'پیام ارسال شد 🎉' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.5 }}
+                className="text-green-600 text-center font-bold mt-4"
+              >
+                پیام شما با موفقیت ارسال شد 🎉
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.form>
+      </motion.div>
+    </motion.section>
   );
+
 }
 
 const BottomGradient = () => (
