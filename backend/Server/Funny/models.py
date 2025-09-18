@@ -42,7 +42,7 @@ class FunnyContent(models.Model):
     image = models.ImageField(verbose_name="تصویر", upload_to="funny/content/image/", null=True, blank=True)
     video = models.URLField(verbose_name="آدرس ویدیو", null=True, blank=True)
 
-    content = RichTextField(verbose_name="متن نماهنگ", null=True, blank=True)
+    content = models.TextField(verbose_name="متن نماهنگ", null=True, blank=True)
 
     created_at = models.DateTimeField(verbose_name="تاریخ ایجاد", auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="تاریخ بهروزرسانی", auto_now=True)
