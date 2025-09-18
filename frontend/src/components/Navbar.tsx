@@ -86,7 +86,7 @@ export const Navbar = ({
                 <HiMenu />
               </button>
               <Link href="/">
-                <Image src="/logo.png" alt="لوگو" width={40} height={40} />
+                <Image src="/logo.png" alt="لوگو" width={120} height={120} />
               </Link>
 
               <ThemeSwitcher />
@@ -96,7 +96,7 @@ export const Navbar = ({
             <div className="hidden md:flex items-center justify-between h-full">
               {/* Left: Logo */}
               <Link href="/" className="w-1/3 flex justify-start">
-                <Image src="/logo.png" alt="لوگو" width={56} height={56} />
+                <Image src="/logo.png" alt="لوگو" width={120} height={120} />
               </Link>
 
               {/* Center: Links */}
@@ -166,7 +166,7 @@ export const Navbar = ({
             >
               <div className="flex items-center justify-between mb-8">
                 <Link href="/">
-                  <Image src="/logo.png" alt="لوگو" width={40} height={40} />
+                  <Image src="/logo.png" alt="لوگو" width={120} height={120} />
                 </Link>
                 <button
                   onClick={() => setSidebarOpen(false)}
