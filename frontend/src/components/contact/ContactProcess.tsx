@@ -41,7 +41,7 @@ export default function ContactProcess() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className='mx-10'
+      className='max-w-7xl mx-auto'
     >
       {/* Title */}
       <motion.h2

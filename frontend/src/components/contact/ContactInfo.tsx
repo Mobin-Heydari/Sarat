@@ -7,20 +7,14 @@ const contactDetails = [
   {
     icon: <FaPhoneAlt size={24} />,
     label: 'شماره تماس',
-    value: '۰۹۱۲۱۲۳۴۵۶۷',
+    value: '0909027371188',
     description: 'پاسخ‌گویی از ساعت ۹ تا ۱۸',
   },
   {
     icon: <FaEnvelope size={24} />,
     label: 'ایمیل',
-    value: 'info@soratgroup.ir',
+    value: 'info@seratsoroud.ir',
     description: 'برای ارسال پیشنهاد یا همکاری',
-  },
-  {
-    icon: <FaMapMarkerAlt size={24} />,
-    label: 'موقعیت',
-    value: 'اسلام‌شهر، تهران',
-    description: 'دفتر مرکزی گروه سرود صراط',
   },
   {
     icon: <FaClock size={24} />,
@@ -47,7 +41,7 @@ export default function ContactInfo() {
         راه‌های ارتباط با ما
       </motion.h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {contactDetails.map((item, i) => (
           <motion.div
             key={item.label}

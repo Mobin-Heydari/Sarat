@@ -4,11 +4,9 @@ import { BsChatSquareText } from 'react-icons/bs';
 import HeroSection from '@/components/HeroSection';
 import ContactIntro from '@/components/contact/ContactIntro';
 import ContactInfo from '@/components/contact/ContactInfo';
-import ContactTeam from '@/components/contact/ContactTeam';
 import { ContactForm } from '@/components/contact/ContactForm';
 import ContactFAQ from '@/components/contact/ContactFAQ';
 import ContactProcess from '@/components/contact/ContactProcess';
-import ContactWall from '@/components/contact/ContactWall';
 
 export const metadata: Metadata = {
   title: 'تماس با ما',
@@ -30,11 +28,9 @@ export default function ContactUs() {
 
       <ContactIntro />
       <ContactInfo />
-      <ContactTeam />
       <ContactProcess />
       <ContactForm />
       <ContactFAQ />
-      <ContactWall />
     </main>
   );
 }
