@@ -1,40 +1,60 @@
 'use client';
 
 import React from 'react';
-import { Vortex } from './ui/Vortex';
-import {
-  FaGithub,
-  FaGitlab,
-  FaLinkedin,
-  FaLocationArrow,
-} from 'react-icons/fa';
 import Link from 'next/link';
+
+import { SiAparat } from "react-icons/si";
+import { FaInstagram, FaTelegram, FaYoutube, FaPhone } from 'react-icons/fa6';
+
 import { motion } from 'framer-motion';
+
+import { Vortex } from './ui/Vortex';
 import { navItems } from '@/data';
+
+
 
 const socialMedia = [
   {
     id: 1,
     icon: (
-      <FaGithub className="text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark bg-base-light dark:bg-base-dark" />
+      <FaYoutube className="text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark bg-base-light dark:bg-base-dark" />
     ),
-    url: 'https://github.com/Mobin-Heydari',
+    url: 'https://youtube.com/@seratsoroud_ir',
   },
   {
     id: 2,
     icon: (
-      <FaGitlab className="text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark bg-base-light dark:bg-base-dark" />
+      <FaTelegram className="text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark bg-base-light dark:bg-base-dark" />
     ),
-    url: 'https://gitlab.com/Mobin_Developer',
+    url: 'https://t.me/seratsoroud',
   },
   {
     id: 3,
     icon: (
-      <FaLinkedin className="text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark bg-base-light dark:bg-base-dark" />
+      <FaInstagram className="text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark bg-base-light dark:bg-base-dark" />
     ),
-    url: 'https://www.linkedin.com/in/mobin--heydari/',
+    url: 'https://instagram.com/seratsoroud_ir',
   },
+  {
+    id: 4,
+    icon: (
+      <SiAparat className="text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark bg-base-light dark:bg-base-dark" />
+    ),
+    url: 'https://aparat.com/seratsoroud_ir',
+  },
+  {
+    id: 5,
+    icon: (
+        <img
+          src="/icons/eitaa.svg"
+          alt="Eitaa icon"
+          className="text-main-text-light dark:text-main-text-dark hover:text-primary-light dark:hover:text-primary-dark bg-base-light dark:bg-base-dark w-6 h-6"
+        />
+    ),
+    url: 'https://eitaa.com/seratsoroud_ir',
+  }
 ];
+
 
 
 export function Footer() {
@@ -64,18 +84,18 @@ export function Footer() {
           className="relative z-10 flex flex-col items-center text-center max-w-3xl"
         >
           <h4 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark">
-            گروه سرود صراط؛ صدای ایمان، فرهنگ و همدلی
+            درباره ما:
           </h4>
           <p className="text-center my-5 text-lg bg-clip-text text-transparent bg-gradient-to-r py-4 from-primary-light via-success-light to-selected-light dark:from-primary-dark dark:via-success-dark dark:to-selected-dark font-semibold">
-            ما با هدف ترویج ارزش‌های اسلامی و ملی، بستری برای رشد هنری نوجوانان و جوانان فراهم کرده‌ایم. اگر شما هم دغدغه فرهنگی دارید، خوشحال می‌شویم همراه‌مان باشید.
+            گروه سرود صراط یکی از برترین گروه های سرود کشور می باشد وآمادهاجرادر مرسمات مختلف است.
           </p>
-          <Link
-            href="/contact-us"
+          <a
+            href="tel:09027371188"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-light dark:bg-primary-dark text-white font-bold hover:scale-105 transition-all duration-300"
           >
-            <FaLocationArrow />
-            ارتباط با گروه
-          </Link>
+            <FaPhone />
+            تماس
+          </a>
         </motion.div>
 
         {/* Quick Links Section */}
