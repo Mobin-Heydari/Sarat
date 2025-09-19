@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, easeOut, easeIn } from "motion/react";
 import React, { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -83,14 +83,15 @@ export const BannerSlider = ({
     animate: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 0.8, ease: easeOut },
     },
     exit: {
       opacity: 0,
       scale: 0.95,
-      transition: { duration: 0.6, ease: "easeIn" },
+      transition: { duration: 0.6, ease: easeIn },
     },
   };
+
 
   const currentBanner = banners[currentIndex];
   const areImagesLoaded = loadedImages.length > 0;
