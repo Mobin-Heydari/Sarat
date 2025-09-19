@@ -64,11 +64,17 @@ export function ContactForm() {
     const form = e.currentTarget;
     const formData = new FormData();
 
-    let errors: { [key: string]: string } = {};
-    if (!form.f_name.value.trim()) errors.f_name = 'نام لازم است.';
-    if (!form.l_name.value.trim()) errors.l_name = 'نام خانوادگی لازم است.';
-    if (!form.phone.value.trim()) errors.phone = 'شماره لازم است.';
-    if (!form.title.value.trim()) errors.title = 'عنوان لازم است.';
+    const f_name = form.elements.namedItem('f_name') as HTMLInputElement;
+    const l_name = form.elements.namedItem('l_name') as HTMLInputElement;
+    const phone = form.elements.namedItem('phone') as HTMLInputElement;
+    const title = form.elements.namedItem('title') as HTMLInputElement;
+    const content = form.elements.namedItem('content') as HTMLTextAreaElement;
+
+    const errors: { [key: string]: string } = {};
+    if (!f_name?.value.trim()) errors.f_name = 'نام لازم است.';
+    if (!l_name?.value.trim()) errors.l_name = 'نام خانوادگی لازم است.';
+    if (!phone?.value.trim()) errors.phone = 'شماره لازم است.';
+    if (!title?.value.trim()) errors.title = 'عنوان لازم است.';
 
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
@@ -77,11 +83,11 @@ export function ContactForm() {
       return;
     }
 
-    formData.append('f_name', form.f_name.value);
-    formData.append('l_name', form.l_name.value);
-    formData.append('phone', form.phone.value);
-    formData.append('title', form.title.value);
-    formData.append('content', form.content.value);
+    formData.append('f_name', f_name.value);
+    formData.append('l_name', l_name.value);
+    formData.append('phone', phone.value);
+    formData.append('title', title.value);
+    formData.append('content', content.value);
     formData.append('user_agent', navigator.userAgent);
 
     const ip_address = await getPublicIP();
@@ -128,10 +134,7 @@ export function ContactForm() {
       className="relative flex flex-col justify-between mt-10 gap-6 mx-4 lg:mx-10"
     >
       {/* Header */}
-      <motion.div
-        variants={containerVariant}
-        className="flex flex-col md:flex-row justify-between items-center gap-y-6"
-      >
+      <motion.div variants={containerVariant} className="flex flex-col md:flex-row justify-between items-center gap-y-6">
         <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary-light via-selected-light to-secondary-light dark:from-primary-dark dark:via-selected-dark dark:to-selected-dark">
           فرم ارتباط با ما
         </h2>
@@ -234,8 +237,7 @@ export function ContactForm() {
             {buttonMessage}
             <BottomGradient />
           </motion.button>
-
-          {/* ✅ Success Message */}
+                    {/* ✅ Success Message */}
           <AnimatePresence>
             {buttonMessage === 'پیام ارسال شد 🎉' && (
               <motion.div
@@ -253,8 +255,8 @@ export function ContactForm() {
       </motion.div>
     </motion.section>
   );
-
 }
+
 
 const BottomGradient = () => (
   <>
