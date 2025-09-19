@@ -1,41 +1,48 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 import { FaHeart, FaLightbulb, FaUsers, FaHandshake, FaLeaf, FaMicrophone } from 'react-icons/fa';
 
 const values = [
   {
     title: 'تعهد فرهنگی',
     icon: <FaHeart size={24} />,
-    description: 'ما به اصول اسلامی، هویت ملی و اخلاق اجتماعی پایبندیم و تلاش می‌کنیم پیام‌های فرهنگی را با صداقت منتقل کنیم.',
+    description:
+      'ما به اصول اسلامی، هویت ملی و اخلاق اجتماعی پایبندیم و تلاش می‌کنیم پیام‌های فرهنگی را با صداقت منتقل کنیم.',
   },
   {
     title: 'خلاقیت هنری',
     icon: <FaLightbulb size={24} />,
-    description: 'هر اثر ما حاصل نوآوری، ذوق هنری و تلاش برای خلق تجربه‌ای تازه و الهام‌بخش است.',
+    description:
+      'هر اثر ما حاصل نوآوری، ذوق هنری و تلاش برای خلق تجربه‌ای تازه و الهام‌بخش است.',
   },
   {
     title: 'همدلی اجتماعی',
     icon: <FaUsers size={24} />,
-    description: 'ما صدای مردم هستیم؛ دغدغه‌های اجتماعی را بازتاب می‌دهیم و با مخاطبان خود ارتباطی صمیمی برقرار می‌کنیم.',
+    description:
+      'ما صدای مردم هستیم؛ دغدغه‌های اجتماعی را بازتاب می‌دهیم و با مخاطبان خود ارتباطی صمیمی برقرار می‌کنیم.',
   },
   {
     title: 'صداقت در همکاری',
     icon: <FaHandshake size={24} />,
-    description: 'در تعامل با نهادها، خانواده‌ها و مخاطبان، صداقت و شفافیت را اصل قرار داده‌ایم.',
+    description:
+      'در تعامل با نهادها، خانواده‌ها و مخاطبان، صداقت و شفافیت را اصل قرار داده‌ایم.',
   },
   {
     title: 'پایداری و رشد',
     icon: <FaLeaf size={24} />,
-    description: 'ما به رشد مستمر، یادگیری و توسعه فردی و گروهی باور داریم و مسیرمان را با انگیزه ادامه می‌دهیم.',
+    description:
+      'ما به رشد مستمر، یادگیری و توسعه فردی و گروهی باور داریم و مسیرمان را با انگیزه ادامه می‌دهیم.',
   },
   {
     title: 'صدای نسل جدید',
     icon: <FaMicrophone size={24} />,
-    description: 'با تمرکز بر نوجوانان و جوانان، بستری برای بیان خلاقانه و رشد استعدادهای هنری فراهم کرده‌ایم.',
+    description:
+      'با تمرکز بر نوجوانان و جوانان، بستری برای بیان خلاقانه و رشد استعدادهای هنری فراهم کرده‌ایم.',
   },
 ];
 
+// ✅ Use a valid easing string instead of raw number array
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -44,10 +51,11 @@ const cardVariants = {
     transition: {
       delay: i * 0.15,
       duration: 0.6,
-      ease: [0.42, 0, 0.58, 1],
+      ease: easeInOut, // ✅ this is a valid EasingFunction
     },
   }),
 };
+
 
 export default function AboutValues() {
   return (

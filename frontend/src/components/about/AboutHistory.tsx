@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaFlagCheckered, FaUsers, FaVideo, FaAward, FaRocket } from 'react-icons/fa';
 
 
 const cardVariants = {
