@@ -5,24 +5,25 @@ import { Music } from '@/types/music';
 import HeroSection from '@/components/HeroSection';
 import MusicDetailSection from '@/components/MusicDetailSection';
 
-type Props = {
-  params: { slug: string };
+type PageProps = {
+  params: Promise<{ slug: string }>;
 };
 
+export const dynamic = 'force-dynamic';
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/detail/${params.slug}/`,
-      { cache: 'no-store' }
-    );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/detail/${slug}/`, {
+      cache: 'no-store',
+    });
     const music: Music = await res.json();
 
     const pageTitle = `${music.title} | صوت فرهنگی از گروه سرود صراط`;
     const pageDescription =
       music.description ||
-      `صوت "${music.title}" از مجموعه آثار شنیداری گروه سرود صراط، با مضامین فرهنگی، مذهبی و اجتماعی.`
+      `صوت "${music.title}" از مجموعه آثار شنیداری گروه سرود صراط، با مضامین فرهنگی، مذهبی و اجتماعی.`;
 
     return {
       title: pageTitle,
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: pageTitle,
         description: pageDescription,
-        url: `https://serat.ir/musics/${params.slug}`,
+        url: `https://serat.ir/musics/${slug}`,
         siteName: 'گروه سرود صراط',
         images: [
           {
@@ -60,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${music.poster}`],
       },
       alternates: {
-        canonical: `https://serat.ir/musics/${params.slug}`,
+        canonical: `https://serat.ir/musics/${slug}`,
       },
     };
   } catch {
@@ -71,22 +72,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+export default async function MusicDetailPage({ params }: PageProps) {
+  const { slug } = await params;
 
-export const dynamic = 'force-dynamic';
-
-export default async function MusicDetailPage({ params }: Props) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/detail/${params.slug}/`,
-    { cache: 'no-store' }
-  );
-  const data: Music = await res.json();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/audios/detail/${slug}/`, {
+    cache: 'no-store',
+  });
+  const music: Music = await res.json();
 
   return (
-    <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
-      {/* Hero Section */}
+    <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark pb-20">
       <HeroSection
         title="صوت فرهنگی صراط"
-        mainText={data.title}
+        mainText={music.title}
         subText="آثار شنیداری با پیام‌های الهام‌بخش"
         buttonTitle="بازگشت به صوت‌ها"
         buttonIcon={<CiMusicNote1 />}
@@ -95,19 +93,16 @@ export default async function MusicDetailPage({ params }: Props) {
         buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 
-      {/* Cultural Context */}
       <section className="max-w-4xl mx-auto text-center space-y-6">
         <h2 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark">
           درباره این صوت
         </h2>
         <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
-          {data.description}
+          {music.description}
         </p>
       </section>
 
-      {/* Music Detail Section */}
-      <MusicDetailSection data={data} />
-
+      <MusicDetailSection data={music} />
     </main>
   );
 }

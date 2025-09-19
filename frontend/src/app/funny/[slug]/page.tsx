@@ -1,72 +1,80 @@
-import { notFound } from 'next/navigation';
-import HeroSection from '@/components/HeroSection';
-import { Funny } from '@/types/funny';
 import { Metadata } from 'next';
-import FunnyDetail from '@/components/funny/FunnyDetail';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
 
+import { Funny } from '@/types/funny';
+import HeroSection from '@/components/HeroSection';
+import FunnyDetail from '@/components/funny/FunnyDetail';
 
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/funny/${params.slug}`, {
-    cache: 'no-store',
-  });
+export const dynamic = 'force-dynamic';
 
-  if (!res.ok) return {};
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
 
-  const data: Funny = await res.json();
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/funny/detail/${slug}`, {
+      cache: 'no-store',
+    });
+    const funny: Funny = await res.json();
 
-  const pageTitle = `${data.title} | شوخی بامزه از گروه سرود صراط`;
-  const pageDescription = `شوخی بامزه با عنوان "${data.title}" منتشر شده در تاریخ ${data.created_at_jalali}. این محتوا بخشی از مجموعه طنزهای فرهنگی گروه سرود صراط است.`;
+    const pageTitle = `${funny.title} | شوخی بامزه از گروه سرود صراط`;
+    const pageDescription = `شوخی بامزه با عنوان "${funny.title}" منتشر شده در تاریخ ${funny.created_at_jalali}. این محتوا بخشی از مجموعه طنزهای فرهنگی گروه سرود صراط است.`;
 
-  return {
-    title: pageTitle,
-    description: pageDescription,
-    keywords: ['شوخی', 'طنز', 'بامزه', 'گروه سرود صراط', 'فرهنگ', 'محتوای خنده‌دار', data.title],
-    openGraph: {
+    return {
       title: pageTitle,
       description: pageDescription,
-      url: `https://serat.ir/funny/${params.slug}`,
-      siteName: 'گروه سرود صراط',
-      images: [
-        {
-          url: `${process.env.NEXT_PUBLIC_MEDIA_URL}${data.poster}`,
-          width: 1200,
-          height: 630,
-          alt: data.title,
-        },
-      ],
-      locale: 'fa_IR',
-      type: 'article',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: pageTitle,
-      description: pageDescription,
-      images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${data.poster}`],
-    },
-    alternates: {
-      canonical: `https://serat.ir/funny/${params.slug}`,
-    },
-  };
+      keywords: ['شوخی', 'طنز', 'بامزه', 'گروه سرود صراط', 'فرهنگ', 'محتوای خنده‌دار', funny.title],
+      openGraph: {
+        title: pageTitle,
+        description: pageDescription,
+        url: `https://serat.ir/funny/${slug}`,
+        siteName: 'گروه سرود صراط',
+        images: [
+          {
+            url: `${process.env.NEXT_PUBLIC_MEDIA_URL}${funny.poster}`,
+            width: 1200,
+            height: 630,
+            alt: funny.title,
+          },
+        ],
+        locale: 'fa_IR',
+        type: 'article',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: pageTitle,
+        description: pageDescription,
+        images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${funny.poster}`],
+      },
+      alternates: {
+        canonical: `https://serat.ir/funny/${slug}`,
+      },
+    };
+  } catch {
+    return {
+      title: 'شوخی یافت نشد',
+      description: 'متأسفانه اطلاعات این شوخی در حال حاضر در دسترس نیست.',
+    };
+  }
 }
 
+export default async function FunnyDetailPage({ params }: PageProps) {
+  const { slug } = await params;
 
-export default async function FunnyDetailPage({ params }: { params: { slug: string } }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/funny/detail/${params.slug}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/funny/detail/${slug}`, {
     cache: 'no-store',
   });
-
-  if (!res.ok) return notFound();
-
-  const data: Funny = await res.json();
+  const funny: Funny = await res.json();
 
   return (
-    <main className="w-full min-h-screen bg-base-light dark:bg-base-dark pb-20">
+    <main className="flex flex-col gap-20 w-full min-h-screen bg-base-light dark:bg-base-dark pb-20">
       <HeroSection
-        title="شوخی بامزه از صراط"
-        mainText={data.title}
-        subText={`منتشر شده در ${data.created_at_jalali} — بازدید: ${data.views}`}
+        title="شوخی بامزه از گروه صراط"
+        mainText={funny.title}
+        subText={`منتشر شده در ${funny.created_at_jalali} — بازدید: ${funny.views}`}
         buttonTitle="بازگشت به لیست شوخی‌ها"
         buttonIcon={<FaArrowAltCircleLeft />}
         buttonPosition="left"
@@ -74,7 +82,7 @@ export default async function FunnyDetailPage({ params }: { params: { slug: stri
         buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 
-      <FunnyDetail data={data} />
+      <FunnyDetail data={funny} />
     </main>
   );
 }

@@ -2,23 +2,22 @@ import { Metadata } from 'next';
 import { BsCollectionPlay } from 'react-icons/bs';
 
 import { Show } from '@/types/show';
-
 import HeroSection from '@/components/HeroSection';
 import ShowVideo from '@/components/shows/ShowVideo';
 import ShowText from '@/components/shows/ShowText';
 import FamousShowsSlider from '@/components/shows/FamousShowSlider';
 
-
-
-type Props = {
-  params: { slug: string };
+type PageProps = {
+  params: Promise<{ slug: string }>;
 };
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/lives/shows/detail/${params.slug}/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/lives/shows/detail/${slug}/`, {
       cache: 'no-store',
     });
     const show: Show = await res.json();
@@ -33,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: pageTitle,
         description: pageDescription,
-        url: `https://serat.ir/shows/${params.slug}`,
+        url: `https://serat.ir/shows/${slug}`,
         siteName: 'گروه سرود صراط',
         images: [
           {
@@ -53,7 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${show.poster}`],
       },
       alternates: {
-        canonical: `https://serat.ir/shows/${params.slug}`,
+        canonical: `https://serat.ir/shows/${slug}`,
       },
     };
   } catch {
@@ -64,15 +63,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function ShowDetail({ params }: Props) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/lives/shows/detail/${params.slug}/`, {
+export default async function ShowDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/lives/shows/detail/${slug}/`, {
     cache: 'no-store',
   });
   const show: Show = await res.json();
 
   return (
     <main className="flex flex-col gap-20 w-full min-h-screen bg-base-light dark:bg-base-dark pb-20">
-      {/* 🎬 Hero Section */}
       <HeroSection
         title="اجرای ویژه از گروه صراط"
         mainText={show.title}
@@ -84,7 +84,6 @@ export default async function ShowDetail({ params }: Props) {
         buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 
-      {/* 📖 Description */}
       <section className="max-w-4xl mx-auto px-4 text-center space-y-6">
         <h2 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark">درباره این اجرا</h2>
         <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
@@ -92,13 +91,9 @@ export default async function ShowDetail({ params }: Props) {
         </p>
       </section>
 
-      {/* 📺 Video */}
       <ShowVideo video={show.video} />
-
-      {/* 📝 Text */}
       <ShowText html={show.text || 'متنی برای این اجرا ثبت نشده است.'} />
 
-      {/* 🌟 Famous Shows */}
       <div className="mx-10">
         <FamousShowsSlider />
       </div>

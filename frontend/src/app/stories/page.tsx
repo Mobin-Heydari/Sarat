@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 
 import { FaInstalod } from "react-icons/fa6";
 

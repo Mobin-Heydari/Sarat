@@ -1,7 +1,5 @@
 import { BsCollectionPlay } from "react-icons/bs";
 
-import Link from "next/link";
-
 import HeroSection from "@/components/HeroSection";
 import FamousCliparts from "@/components/FamousCliparts";
 import FamousMusicSection from "@/components/FamousMusicsSection";
@@ -10,6 +8,7 @@ import { BannerSlider } from "@/components/ui/BannerSlider";
 
 import { banners } from "@/data";
 import NewShowsSlider from "@/components/shows/FamousShowSlider";
+
 
 export const metadata = {
   title: 'صفحه اصلی گروه سرود صراط | نماهنگ، صوت، طنز و ارتباط با ما',

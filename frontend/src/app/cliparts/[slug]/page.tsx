@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { BsCollectionPlay } from 'react-icons/bs';
-import Link from 'next/link';
 
 import { Clipart } from '@/types/clipart';
 import HeroSection from '@/components/HeroSection';
@@ -8,21 +7,24 @@ import FamousCliparts from '@/components/FamousCliparts';
 import ClipartVideo from '@/components/ClipartVideo';
 import ClipartText from '@/components/ClipartText';
 
-type Props = {
-  params: { slug: string };
+type PageProps = {
+  params: Promise<{ slug: string }>;
 };
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/cliparts/detail/${params.slug}/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/cliparts/detail/${slug}/`, {
       cache: 'no-store',
     });
     const clipart: Clipart = await res.json();
 
     const pageTitle = `${clipart.title} | نماهنگ فرهنگی از گروه سرود صراط`;
-    const pageDescription = clipart.description || `نماهنگ "${clipart.title}" از مجموعه آثار فرهنگی گروه سرود صراط.`;
+    const pageDescription =
+      clipart.description || `نماهنگ "${clipart.title}" از مجموعه آثار فرهنگی گروه سرود صراط.`;
 
     return {
       title: pageTitle,
@@ -31,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: pageTitle,
         description: pageDescription,
-        url: `https://serat.ir/cliparts/${params.slug}`,
+        url: `https://serat.ir/cliparts/${slug}`,
         siteName: 'گروه سرود صراط',
         images: [
           {
@@ -51,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${clipart.poster}`],
       },
       alternates: {
-        canonical: `https://serat.ir/cliparts/${params.slug}`,
+        canonical: `https://serat.ir/cliparts/${slug}`,
       },
     };
   } catch {
@@ -62,15 +64,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function ClipartDetail({ params }: Props) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/cliparts/detail/${params.slug}/`, {
+export default async function ClipartDetail({ params }: PageProps) {
+  const { slug } = await params;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/cliparts/detail/${slug}/`, {
     cache: 'no-store',
   });
   const clipart: Clipart = await res.json();
 
   return (
     <main className="flex flex-col gap-20 w-full min-h-screen bg-base-light dark:bg-base-dark pb-20">
-      {/* Hero Section */}
       <HeroSection
         title="نماهنگ ویژه از گروه صراط"
         mainText={clipart.title}
@@ -82,7 +85,6 @@ export default async function ClipartDetail({ params }: Props) {
         buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 
-      {/* Additional Section */}
       <section className="max-w-4xl mx-auto px-4 text-center space-y-6">
         <h2 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark">
           درباره این نماهنگ
@@ -92,15 +94,10 @@ export default async function ClipartDetail({ params }: Props) {
         </p>
       </section>
 
-      {/* Video */}
       <ClipartVideo video={clipart.video} />
-
-      {/* Text */}
       <ClipartText html={clipart.text || 'متنی برای این نماهنگ ثبت نشده است.'} />
 
-
       <div className="mx-10">
-        {/* Famous Cliparts */}
         <FamousCliparts />
       </div>
     </main>

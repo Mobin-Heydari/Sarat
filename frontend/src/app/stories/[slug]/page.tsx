@@ -1,19 +1,18 @@
 import { Metadata } from 'next';
 import { FaInstalod } from 'react-icons/fa6';
-import { Story } from '@/types/stories';
 
+import { Story } from '@/types/stories';
 import HeroSection from '@/components/HeroSection';
 import StoryVideoGallery from '@/components/StoryVideoGallery';
 
-type Props = {
-  params: { slug: string };
+type PageProps = {
+  params: Promise<{ slug: string }>;
 };
 
 export const dynamic = 'force-dynamic';
 
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params;
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/stories/detail/${slug}/`, {
@@ -30,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const pageTitle = `${story.title} | استوری فرهنگی از گروه سرود صراط`;
     const pageDescription =
       story.description ||
-      `استوری "${story.title}" از مجموعه آثار کوتاه فرهنگی گروه سرود صراط، با پیام‌هایی از ایمان، همدلی و زیبایی.`
+      `استوری "${story.title}" از مجموعه آثار کوتاه فرهنگی گروه سرود صراط، با پیام‌هایی از ایمان، همدلی و زیبایی.`;
 
     return {
       title: pageTitle,
@@ -47,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: pageTitle,
         description: pageDescription,
-        url: `https://yourdomain.com/stories/${slug}`,
+        url: `https://serat.ir/stories/${slug}`,
         siteName: 'گروه سرود صراط',
         images: [
           {
@@ -67,7 +66,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: [`${process.env.NEXT_PUBLIC_MEDIA_URL}${story.poster}`],
       },
       alternates: {
-        canonical: `https://yourdomain.com/stories/${slug}`,
+        canonical: `https://serat.ir/stories/${slug}`,
       },
     };
   } catch {
@@ -78,9 +77,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-
-export default async function StoryDetailPage({ params }: Props) {
-  const { slug } = params;
+export default async function StoryDetailPage({ params }: PageProps) {
+  const { slug } = await params;
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/stories/detail/${slug}/`, {
     cache: 'no-store',
@@ -94,8 +92,7 @@ export default async function StoryDetailPage({ params }: Props) {
   const story: Story = await res.json();
 
   return (
-    <main className="flex flex-col gap-20 bg-base-light dark:bg-base-dark">
-      {/* Hero Section */}
+    <main className="flex flex-col gap-20 w-full min-h-screen bg-base-light dark:bg-base-dark pb-20">
       <HeroSection
         title="استوری فرهنگی صراط"
         mainText={story.title}
@@ -107,8 +104,7 @@ export default async function StoryDetailPage({ params }: Props) {
         buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 
-      {/* Cultural Context */}
-      <section className="max-w-4xl mx-auto text-center space-y-6">
+      <section className="max-w-4xl mx-auto px-4 text-center space-y-6">
         <h2 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark">
           درباره این استوری
         </h2>
@@ -117,7 +113,6 @@ export default async function StoryDetailPage({ params }: Props) {
         </p>
       </section>
 
-      {/* Video Gallery */}
       <StoryVideoGallery story={story} />
     </main>
   );

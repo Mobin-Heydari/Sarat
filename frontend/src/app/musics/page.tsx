@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { CiMusicNote1 } from 'react-icons/ci';
 
 import { Music } from '@/types/music';
