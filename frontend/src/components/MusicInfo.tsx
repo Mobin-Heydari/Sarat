@@ -1,6 +1,7 @@
 'use client';
+import Image from 'next/image';
 
-import { CalendarDays, Eye, Share2 } from 'lucide-react';
+import { CalendarDays, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Music } from '@/types/music';
 
@@ -14,10 +15,12 @@ export default function MusicHeroBanner({ data }: { data: Music }) {
         transition={{ duration: 1 }}
         className="absolute inset-0 z-0"
       >
-        <img
+        <Image
           src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${data.poster}`}
           alt={`پوستر ${data.title}`}
           className="w-full h-full object-cover blur-sm brightness-75"
+          width={500}
+          height={500}
         />
       </motion.div>
 

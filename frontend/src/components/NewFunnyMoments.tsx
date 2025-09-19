@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import FunnyCard from './FunnyCard';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
 
 type FunnyItem = {
   title: string;

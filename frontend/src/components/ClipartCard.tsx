@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 import { useRouter } from 'next/navigation';
 import { CardBody, CardContainer, CardItem } from '@/components/ui/3DCards';
 import { Clipart } from '@/types/clipart';
@@ -14,11 +16,13 @@ export default function ClipartCard(item: Clipart) {
         
         {/* Poster */}
         <CardItem translateZ={100} className="relative w-full h-64 overflow-hidden rounded-xl">
-          <img
+          <Image
             src={`${process.env.NEXT_PUBLIC_MEDIA_URL}${item.poster}`}
             alt={`پوستر ${item.title}`}
             className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover/card:scale-105"
             loading="lazy"
+            width={500}
+            height={500}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 rounded-xl" />
           <div className="absolute bottom-4 left-4 z-20">

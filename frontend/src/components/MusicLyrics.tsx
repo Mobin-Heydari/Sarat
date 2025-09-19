@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation, useInView, easeInOut } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 export default function MusicLyrics({ title, html }: { title: string; html: string }) {
@@ -19,7 +19,7 @@ export default function MusicLyrics({ title, html }: { title: string; html: stri
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.42, 0, 0.58, 1],
+        ease: easeInOut, // ✅ replaced raw array with valid easing function
         when: 'beforeChildren',
         staggerChildren: 0.2,
       },

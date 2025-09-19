@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import MusicCard from './MusicCard';
 import { Music } from '@/types/music';

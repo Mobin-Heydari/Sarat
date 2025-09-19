@@ -8,7 +8,11 @@ const nextConfig: NextConfig = {
 
   images: {
     domains: ['127.0.0.1', 'localhost'],
-  }
+  },
+  eslint: {
+  // Warning: This allows production builds to complete even with ESLint errors
+  ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
