@@ -28,6 +28,10 @@ const itemVariants: Variants = {
   },
 };
 
+type ShowCardProps = Pick<Show, 'slug' | 'title' | 'description' | 'poster' | 'views' | 'created_at_jalali'>;
+
+
+
 export default function ShowCard({
   slug,
   title,

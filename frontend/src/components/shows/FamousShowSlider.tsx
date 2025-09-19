@@ -109,7 +109,14 @@ export default function FamousShowsSlider() {
           autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          a11y
+          a11y={{
+            enabled: true,
+            prevSlideMessage: 'اسلاید قبلی',
+            nextSlideMessage: 'اسلاید بعدی',
+            firstSlideMessage: 'اولین اسلاید',
+            lastSlideMessage: 'آخرین اسلاید',
+          }}
+
           spaceBetween={16}
           breakpoints={{
             0: { slidesPerView: 1 },
@@ -128,8 +135,8 @@ export default function FamousShowsSlider() {
             '--swiper-scrollbar-color': 'var(--primary-light)',
           } as React.CSSProperties}
         >
-          {shows.map((show) => (
-            <SwiperSlide key={show.slug} className="h-full">
+          {shows.map((item) => (
+            <SwiperSlide key={item.slug} className="h-full">
               <motion.div
                 variants={fadeInUp}
                 initial="hidden"
@@ -137,7 +144,7 @@ export default function FamousShowsSlider() {
                 viewport={{ once: true, amount: 0.3 }}
                 className="h-full"
               >
-                <ShowCard {...show} />
+                <ShowCard {...item} />
               </motion.div>
             </SwiperSlide>
           ))}

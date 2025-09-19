@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 
 type Props = {
   html: string;
@@ -12,7 +12,7 @@ const fadeIn = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] },
+    transition: { duration: 0.6, ease: easeInOut }, // ✅ Use easing function
   },
 };
 
