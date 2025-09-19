@@ -11,17 +11,17 @@ export const navItems = [
 
 export const banners = [
   {
-    image: "/logo.png",
+    image: "/banners/banner-1.jpg",
     title: "کشف ناشناخته‌ها",
     subtitle: "به دنیایی از شگفتی و کشف قدم بگذارید.",
   },
   {
-    image: "/logo.png",
+    image: "/banners/banner-2.jpg",
     title: "طراحی آینده‌ات",
     subtitle: "تجربه‌هایی بساز که دل‌ها را تکان دهد.",
   },
   {
-    image: "/logo.png",
+    image: "/banners/banner-3.jpg",
     title: "با هدف بساز",
     subtitle: "کدی بنویس که توان‌بخش باشد و سیستم‌هایی خلق کن که ماندگار باشند.",
   },
