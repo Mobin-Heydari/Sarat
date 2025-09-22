@@ -1,11 +1,11 @@
 export const navItems = [
-  { name: "درباره", href: "/about-us"},
-  { name: "تماس باما", href: "/contact-us"},
   { name: "اجرا ها", href: "/shows"},
   { name: "نماهنگ ", href: "/cliparts"},
-  { name: "استوری", href: "/stories"},
   { name: "صوت", href: "/musics"},
+  { name: "استوری", href: "/stories"},
   { name: "بامزه ها", href: "/funny"},
+  { name: "تماس باما", href: "/contact-us"},
+  { name: "درباره ما", href: "/about-us"},
 ]
 
 

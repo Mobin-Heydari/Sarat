@@ -92,15 +92,15 @@ export const Navbar = ({
               <ThemeSwitcher />
             </div>
 
-            {/* Desktop */}
-            <div className="hidden md:flex items-center justify-between h-full">
+            {/* Desktop Navbar */}
+            <div className="hidden md:flex items-center justify-between h-20 w-full mx-auto">
               {/* Left: Logo */}
-              <Link href="/" className="w-1/3 flex justify-start">
-                <Image src="/logo.png" alt="لوگو" width={120} height={120} />
+              <Link href="/" className="flex-shrink-0 flex justify-start min-w-[120px]">
+                <Image src="/logo.png" alt="لوگو" width={90} height={90} />
               </Link>
 
-              {/* Center: Links */}
-              <div className="w-1/3 flex justify-center gap-10">
+              {/* Center: Navigation Links */}
+              <div className="flex-grow flex justify-center gap-8 flex-wrap">
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (
@@ -108,7 +108,7 @@ export const Navbar = ({
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        "relative text-lg font-semibold transition-colors duration-200",
+                        "relative md:text-xs lg:text-lg font-semibold transition-colors duration-200",
                         isActive
                           ? "text-primary-light dark:text-primary-dark"
                           : "text-main-text-light hover:text-hover-light dark:text-main-text-dark dark:hover:text-hover-dark"
@@ -128,8 +128,8 @@ export const Navbar = ({
                 })}
               </div>
 
-              {/* Right: Invite + Theme */}
-              <div className="w-1/3 flex justify-end items-center gap-6">
+              {/* Right: Invite Button + Theme Switcher */}
+              <div className="flex-shrink-0 flex justify-end items-center gap-4 min-w-[180px]">
                 <Link
                   href="/contact-us"
                   className="px-4 py-2 rounded-lg font-semibold transition-colors duration-200 bg-primary-light text-base-light hover:bg-hover-light dark:bg-primary-dark dark:text-base-dark dark:hover:bg-hover-dark"
