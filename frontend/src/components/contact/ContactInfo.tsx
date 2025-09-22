@@ -7,7 +7,7 @@ const contactDetails = [
   {
     icon: <FaPhoneAlt size={24} />,
     label: 'شماره تماس',
-    value: '0909027371188',
+    value: '09027371188',
     description: 'پاسخ‌گویی از ساعت ۹ تا ۱۸',
   },
   {
@@ -15,12 +15,6 @@ const contactDetails = [
     label: 'ایمیل',
     value: 'info@seratsoroud.ir',
     description: 'برای ارسال پیشنهاد یا همکاری',
-  },
-  {
-    icon: <FaClock size={24} />,
-    label: 'ساعات کاری',
-    value: 'شنبه تا چهارشنبه',
-    description: '۹ صبح تا ۶ عصر',
   },
 ];
 
@@ -41,7 +35,7 @@ export default function ContactInfo() {
         راه‌های ارتباط با ما
       </motion.h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {contactDetails.map((item, i) => (
           <motion.div
             key={item.label}
