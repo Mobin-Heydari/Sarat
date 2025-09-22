@@ -34,3 +34,55 @@
   font-family:'samim';
   src: url(/fonts/samim.ttf) format('truetype');
 }
+/* globals.css (add once, ensure imported in app/layout) */
+
+/* Force Swiper internals to fill parent */
+.banner-swiper,
+.banner-swiper .swiper-wrapper,
+.banner-swiper .swiper-slide {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* Ensure Next Image wrappers and generated img fill slide area */
+.banner-swiper .swiper-slide > div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.banner-swiper .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Pagination center + polish */
+.banner-swiper .swiper-pagination {
+  bottom: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+@media (min-width: 640px) {
+  .banner-swiper .swiper-pagination {
+    bottom: 16px !important;
+  }
+}
+.banner-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.6);
+  opacity: 1;
+  transition: all 200ms ease;
+  border-radius: 9999px;
+}
+.banner-swiper .swiper-pagination-bullet-active {
+  width: 22px;
+  background: #ffffff;
+}
+
+/* Performance hint */
+.banner-swiper .swiper-wrapper {
+  will-change: transform;
+}

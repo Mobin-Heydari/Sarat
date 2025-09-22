@@ -1,166 +1,147 @@
 "use client";
-import { cn } from "@/lib/utils";
-import { motion, AnimatePresence, easeOut, easeIn } from "motion/react";
-import React, { useEffect, useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-type Banner = {
-  image: string;
-  title: string;
-  subtitle: string;
+import React, { useMemo, useRef, useEffect, useState } from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay, Keyboard, Pagination, A11y } from "swiper/modules";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+type Banner = { image: string };
+
+type Props = {
+  banners: Banner[];
+  className?: string;
+  overlay?: boolean;
+  autoplay?: boolean;
+  delayMs?: number;
+  fit?: "cover" | "contain";
+  heightClasses?: string;
 };
 
-export const BannerSlider = ({
+export function BannerSlider({
   banners,
-  overlay = true,
-  overlayClassName,
   className,
+  overlay = true,
   autoplay = true,
-  direction = "up",
-}: {
-  banners: Banner[];
-  overlay?: boolean;
-  overlayClassName?: string;
-  className?: string;
-  autoplay?: boolean;
-  direction?: "up" | "down";
-}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [loadedImages, setLoadedImages] = useState<string[]>([]);
+  delayMs = 4000,
+  fit = "cover",
+  heightClasses = "min-h-[320px] h-[38vh] sm:h-[48vh] lg:h-[60vh] xl:h-[70vh]",
+}: Props) {
+  const sources = useMemo(() => banners.map((b) => b.image), [banners]);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + 1 === banners.length ? 0 : prevIndex + 1
-    );
-  };
+  // refs for buttons and swiper instance
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
+  const swiperRef = useRef<any | null>(null);
 
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex - 1 < 0 ? banners.length - 1 : prevIndex - 1
-    );
-  };
+  // ensure DOM nodes exist before attaching to swiper
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
 
+  // Attach navigation elements when swiper and buttons are available
   useEffect(() => {
-    const loadImages = () => {
-      const loadPromises = banners.map((banner) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = banner.image;
-          img.onload = () => resolve(banner.image);
-          img.onerror = reject;
-        });
-      });
+    const swiper = swiperRef.current;
+    const prevEl = prevRef.current;
+    const nextEl = nextRef.current;
+    if (!swiper || !prevEl || !nextEl) return;
 
-      Promise.all(loadPromises)
-        .then((loaded) => setLoadedImages(loaded as string[]))
-        .catch((err) => console.error("خطا در بارگذاری تصاویر", err));
-    };
-
-    loadImages();
-  }, [banners]);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight") handleNext();
-      else if (event.key === "ArrowLeft") handlePrevious();
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    let interval: any;
-    if (autoplay) {
-      interval = setInterval(() => handleNext(), 6000);
+    // assign elements and (re)initialize navigation
+    swiper.params.navigation.prevEl = prevEl;
+    swiper.params.navigation.nextEl = nextEl;
+    if (swiper.navigation) {
+      swiper.navigation.init();
+      swiper.navigation.update();
     }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      clearInterval(interval);
-    };
-  }, [autoplay]);
-
-  const slideVariants = {
-    initial: { opacity: 0, scale: 0.95 },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8, ease: easeOut },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.95,
-      transition: { duration: 0.6, ease: easeIn },
-    },
-  };
-
-
-  const currentBanner = banners[currentIndex];
-  const areImagesLoaded = loadedImages.length > 0;
+  }, [ready]);
 
   return (
-    <div
+    <section
       className={cn(
-        "overflow-hidden h-full w-full relative flex items-center justify-center mt-20",
-        className,
+        "relative w-full overflow-hidden mt-20 select-none",
+        heightClasses,
+        className
       )}
-      style={{perspective: "1000px" }}
+      aria-roledescription="carousel"
+      aria-label="Banner slider"
     >
-      {areImagesLoaded && overlay && (
-        <div className={cn("absolute inset-0 bg-black/60 z-40", overlayClassName)} />
-      )}
+      {overlay && <div className="pointer-events-none absolute inset-0 bg-black/35 z-10" />}
 
-      {areImagesLoaded && (
-        <>
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={currentIndex}
-              src={loadedImages[currentIndex]}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={slideVariants}
-              className="image h-full w-full absolute inset-0 object-cover object-center transition-transform duration-1000 scale-100 hover:scale-105"
-            />
-          </AnimatePresence>
+      <Swiper
+        modules={[Navigation, Autoplay, Keyboard, Pagination, A11y]}
+        className="banner-swiper h-full w-full"
+        onSwiper={(s) => {
+          swiperRef.current = s;
+        }}
+        // provide placeholders; real elements get attached in effect above
+        navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+        pagination={{ clickable: true, dynamicBullets: true }}
+        keyboard={{ enabled: true }}
+        autoplay={
+          autoplay
+            ? { delay: delayMs, disableOnInteraction: false, pauseOnMouseEnter: true }
+            : false
+        }
+        speed={700}
+        loop
+        spaceBetween={0}
+      >
+        {sources.map((src, i) => (
+          <SwiperSlide key={i} className="!h-full !w-full">
+            <div className={cn("relative h-full w-full", fit === "contain" && "bg-black")}>
+              <Image
+                src={src}
+                alt={`Banner ${i + 1}`}
+                fill
+                sizes="100vw"
+                priority={i === 0}
+                className={cn(
+                  "transition-transform duration-[1000ms] ease-out",
+                  fit === "cover"
+                    ? "object-cover object-center hover:scale-[1.02]"
+                    : "object-contain object-center"
+                )}
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 sm:h-24 bg-gradient-to-t from-black/40 to-transparent z-10" />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-          {/* متن پویا */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="z-50 text-center px-4 max-w-2xl"
-          >
-            <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-lg mb-4">
-              {currentBanner.title}
-            </h1>
-            <p className="text-lg md:text-2xl text-neutral-200 mb-6">
-              {currentBanner.subtitle}
-            </p>
-          </motion.div>
+      {/* Navigation buttons using refs (type=button prevents form submits) */}
+      <button
+        type="button"
+        ref={nextRef}
+        aria-label="قبلی"
+        className={cn(
+          "absolute top-1/2 left-3 sm:left-4 -translate-y-1/2 z-30 rounded-full text-white",
+          "bg-black/40 hover:bg-black/50 backdrop-blur-md shadow-lg hover:shadow-xl",
+          "transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/60",
+          "p-2.5 sm:p-3 lg:p-3.5"
+        )}
+      >
+        <HiChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden />
+      </button>
 
-          {/* کنترل‌ها با آیکون */}
-          <div className="absolute bottom-6 z-50 flex gap-4">
-            <button
-              onClick={handleNext}
-              className="p-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition"
-              aria-label="بعدی"
-            >
-              <FaChevronRight className="text-xl" />
-            </button>
-            <button
-              onClick={handlePrevious}
-              className="p-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition"
-              aria-label="قبلی"
-            >
-              <FaChevronLeft className="text-xl" />
-            </button>
-          </div>
-
-          {/* شماره اسلاید */}
-          <div className="absolute top-6 left-6 z-50 text-white text-sm bg-black/40 px-3 py-1 rounded-full">
-            {currentIndex + 1} / {banners.length}
-          </div>
-        </>
-      )}
-    </div>
+      <button
+        type="button"
+        ref={prevRef}
+        aria-label="بعدی"
+        className={cn(
+          "absolute top-1/2 right-3 sm:right-4 -translate-y-1/2 z-30 rounded-full text-white",
+          "bg-black/40 hover:bg-black/50 backdrop-blur-md shadow-lg hover:shadow-xl",
+          "transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/60",
+          "p-2.5 sm:p-3 lg:p-3.5"
+        )}
+      >
+        <HiChevronRight className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden />
+      </button>
+    </section>
   );
-};
+}
+
+export default BannerSlider;
