@@ -5,12 +5,6 @@ import { FaHeart, FaLightbulb, FaUsers, FaHandshake, FaLeaf, FaMicrophone } from
 
 const values = [
   {
-    title: 'تعهد فرهنگی',
-    icon: <FaHeart size={24} />,
-    description:
-      'ما به اصول اسلامی، هویت ملی و اخلاق اجتماعی پایبندیم و تلاش می‌کنیم پیام‌های فرهنگی را با صداقت منتقل کنیم.',
-  },
-  {
     title: 'خلاقیت هنری',
     icon: <FaLightbulb size={24} />,
     description:
@@ -21,12 +15,6 @@ const values = [
     icon: <FaUsers size={24} />,
     description:
       'ما صدای مردم هستیم؛ دغدغه‌های اجتماعی را بازتاب می‌دهیم و با مخاطبان خود ارتباطی صمیمی برقرار می‌کنیم.',
-  },
-  {
-    title: 'صداقت در همکاری',
-    icon: <FaHandshake size={24} />,
-    description:
-      'در تعامل با نهادها، خانواده‌ها و مخاطبان، صداقت و شفافیت را اصل قرار داده‌ایم.',
   },
   {
     title: 'پایداری و رشد',
@@ -63,7 +51,7 @@ export default function AboutValues() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className="max-w-6xl mx-auto py-16 px-4"
+      className="max-w-6xl mx-auto px-4"
     >
       <motion.h2
         initial={{ opacity: 0, y: 10 }}
@@ -74,7 +62,7 @@ export default function AboutValues() {
         ارزش‌های ما
       </motion.h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {values.map((value, i) => (
           <motion.div
             key={value.title}

@@ -28,7 +28,7 @@ export default function AboutJoinUs() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      className="max-w-6xl mx-auto py-16 px-4 text-center"
+      className="max-w-6xl mx-auto px-4 text-center"
     >
       {/* Title */}
       <motion.h2
@@ -47,7 +47,7 @@ export default function AboutJoinUs() {
         transition={{ delay: 0.2, duration: 0.6 }}
         className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed max-w-3xl mx-auto mb-10"
       >
-        ما همیشه به دنبال افراد مشتاق، خلاق و متعهد هستیم تا در مسیر فرهنگی و هنری‌مان همراه شوند. اگر علاقه‌مند به فعالیت‌های گروهی، رسانه‌ای یا همکاری سازمانی هستید، فرصت را از دست ندهید.
+        ما همیشه پذیرای افراد مشتاق، خلاق و متعهد هستیم تا در مسیر فرهنگی و هنری‌مان همراه شوند. اگر علاقه‌مند به فعالیت‌های گروهی، رسانه‌ای یا همکاری سازمانی هستید، فرصت را از دست ندهید.
       </motion.p>
 
       {/* Roles */}
