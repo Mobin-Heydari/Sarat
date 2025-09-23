@@ -113,8 +113,6 @@ export default function MusicPlayer({ src, title, poster }: MusicPlayerProps) {
           priority
           unoptimized
           className="rounded-2xl"
-          width={500}
-          height={500}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
       </motion.div>
