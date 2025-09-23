@@ -69,21 +69,6 @@ export default function AboutJoinUs() {
           </motion.div>
         ))}
       </div>
-
-      {/* CTA Button */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-light dark:bg-primary-dark text-white font-semibold hover:scale-105 transition-all duration-300"
-        >
-          <FaUserPlus />
-          تماس با ما
-        </Link>
-      </motion.div>
     </motion.section>
   );
 }
