@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
 
+import { BsPeople } from 'react-icons/bs';
 
 import AboutHistory from '@/components/about/AboutHistory';
 import AboutValues from '@/components/about/AboutValues';
 import AboutJoinUs from '@/components/about/AboutJoinUs';
+import HeroSection from '@/components/HeroSection';
 
 
 
@@ -54,7 +56,18 @@ export const metadata: Metadata = {
 
 export default function AboutUs() {
   return (
-    <main className="flex flex-col gap-10 mt-28">
+    <main className="flex flex-col gap-10">
+      
+      <HeroSection
+        title="درباره‌ی گروه صراط"
+        mainText="با ما بیشتر آشنا شوید"
+        subText="مسیر فرهنگی و هنری ما را بشناسید"
+        buttonTitle="تماس با ما"
+        buttonIcon={<BsPeople />}
+        buttonPosition="right"
+        buttonUrl="/contact"
+      />
+
       <AboutValues />
       <AboutHistory />
       <AboutJoinUs />

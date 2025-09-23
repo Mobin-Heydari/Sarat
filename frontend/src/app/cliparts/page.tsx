@@ -38,7 +38,6 @@ export const metadata: Metadata = {
 };
 
 
-
 export default async function ClipartsPage() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/cliparts/`, {
     cache: 'no-store',
@@ -49,35 +48,48 @@ export default async function ClipartsPage() {
     <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
       {/* Hero */}
       <HeroSection
-        title="مجموعه‌ی نماهنگ‌های صراط"
-        mainText="هنر، ایمان، همدلی"
-        subText="در این بخش، نماهنگ‌های فرهنگی و مذهبی گروه سرود صراط را مشاهده می‌کنید."
+        title="نماهنگ‌های گروه سرود صراط"
+        mainText="تصویر و صدا در خدمت پیام"
+        subText="نماهنگ‌هایی که روایتگر ارزش‌های فرهنگی و معنوی‌اند؛ اجراها، روایت‌های تصویری و جلوه‌های هنری گروه را اینجا ببینید."
         buttonTitle="مشاهده نماهنگ‌ها"
         buttonIcon={<BsCollectionPlay />}
         buttonPosition="right"
         buttonUrl="/cliparts"
+        buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 
       {/* Intro Section */}
-      <section className="max-w-4xl mx-auto text-center space-y-6">
+      <section className="max-w-4xl mx-auto text-center space-y-6 px-4">
         <h2 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">
-          چرا نماهنگ‌های صراط؟
+          چه‌طور نماهنگ‌های ما متفاوت‌اند
         </h2>
         <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
-          نماهنگ‌های گروه صراط با هدف ترویج ارزش‌های فرهنگی، مذهبی و اجتماعی تولید شده‌اند. این آثار هنری با مشارکت نوجوانان و جوانان، بستری برای رشد هنری و معنوی فراهم می‌کنند.
+          نماهنگ‌های صراط ترکیبی از موسیقی جمعی، تصویرپردازی معنی‌دار و روایت‌های مؤثر‌اند. هر اثر با مشارکت نوجوانان و جوانان تولید می‌شود تا هم پیام فرهنگی منتقل شود و هم تجربه بصری قدرتمندی خلق گردد.
         </p>
       </section>
 
       {/* Clipart Grid */}
-      <section className="max-w-7xl mx-auto">
+      <section className="mx-15 px-4">
         <h2 className="text-2xl font-bold text-center mb-8 text-main-text-light dark:text-main-text-dark">
-          مجموعه نماهنگ‌ها
+          آرشیو نماهنگ‌ها
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {cliparts.map((item) => (
-            <ClipartCard key={item.slug} {...item} />
-          ))}
-        </div>
+
+        {cliparts.length === 0 ? (
+          <div className="text-center py-16">
+            <h3 className="text-2xl font-medium text-main-text-light dark:text-main-text-dark mb-4">
+              هنوز نماهنگی منتشر نشده
+            </h3>
+            <p className="text-base text-muted-foreground">
+              ما در حال آماده‌سازی نماهنگ‌های جدید هستیم. بعداً دوباره سر بزنید یا اگر نماهنگی دارید آن را برای انتشار ارسال کنید.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            {cliparts.map((item) => (
+              <ClipartCard key={item.slug} {...item} />
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

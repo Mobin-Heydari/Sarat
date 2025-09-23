@@ -70,23 +70,11 @@ export default function Home() {
         buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 
-      {/* Intro Section */}
-      <section className="max-w-4xl mx-auto text-center space-y-6">
-        <h2 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">
-          درباره مجموعه صراط
-        </h2>
-        <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
-          گروه سرود صراط با هدف ترویج ارزش‌های فرهنگی، مذهبی و اجتماعی از طریق هنر فعالیت می‌کند. آثار ما شامل نماهنگ‌های تصویری، صوت‌های شنیداری، لحظات طنز و محتوای الهام‌بخش برای تمام سنین است. ما باور داریم که هنر می‌تواند دل‌ها را به هم نزدیک‌تر کند.
-        </p>
-      </section>
 
       {/* Famous Sections */}
       <NewShowsSlider />
       <FamousCliparts />
       <FamousMusicSection />
-
-      {/* Contact Section */}
-      <ContactForm />
     </main>
   );
 }

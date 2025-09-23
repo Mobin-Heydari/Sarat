@@ -59,10 +59,10 @@ export default async function Musics() {
     <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
       {/* Hero Section */}
       <HeroSection
-        title="صوت‌های فرهنگی صراط"
-        mainText="آثار شنیداری با پیام‌های الهام‌بخش"
-        subText="در این بخش، صوت‌های برتر گروه سرود صراط را گوش دهید و لذت ببرید."
-        buttonTitle="مشاهده صوت‌ها"
+        title="صوت‌ها و سرودهای گروه صراط"
+        mainText="آوای جمع، پیامِ همدلانه"
+        subText="مجموعه‌ای از قطعات شنیداری؛ از سرودهای جمعی تا نماهای صوتی کوتاه که پیام فرهنگی و معنوی را منتقل می‌کنند."
+        buttonTitle="گوش دادن به آثار"
         buttonIcon={<CiMusicNote1 />}
         buttonPosition="right"
         buttonUrl="/audios"
@@ -70,20 +70,17 @@ export default async function Musics() {
       />
 
       {/* Intro Section */}
-      <section className="max-w-4xl mx-auto text-center space-y-6">
+      <section className="max-w-4xl mx-auto text-center space-y-6 px-4">
         <h2 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">
-          چرا صوت‌های صراط؟
+          چرا صوت‌های صراط را بشنوید
         </h2>
         <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
-          صوت‌های گروه سرود صراط با هدف انتقال پیام‌های فرهنگی، مذهبی و اجتماعی از طریق هنر شنیداری تولید شده‌اند. این آثار با صدای نوجوانان و جوانان اجرا شده و مناسب برای گوش دادن در لحظات آرامش، عبادت یا تأمل هستند.
+          آثار صوتی ما با صدای گروهی از نوجوانان و جوانان اجرا شده‌اند و با تاکید بر پیام‌های فرهنگی و اجتماعی تولید شده‌اند. هر قطعه برای ایجاد لحظه‌ای تأمل‌برانگیز و نزدیک‌تر کردن شنونده به پیام انتخاب یا ساخته شده است.
         </p>
       </section>
 
       {/* Music Grid */}
       <section className="mx-10">
-        <h2 className="text-2xl font-bold text-center mb-8 text-main-text-light dark:text-main-text-dark">
-          مجموعه صوت‌ها
-        </h2>
         <MusicSection items={items} />
       </section>
     </main>

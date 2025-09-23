@@ -1,8 +1,11 @@
 import { Metadata } from 'next';
 
+import { BsChatSquareText } from 'react-icons/bs';
+
 import ContactInfo from '@/components/contact/ContactInfo';
 import { ContactForm } from '@/components/contact/ContactForm';
 import ContactFAQ from '@/components/contact/ContactFAQ';
+import HeroSection from '@/components/HeroSection';
 
 
 export const metadata: Metadata = {
@@ -72,7 +75,16 @@ export const metadata: Metadata = {
 
 export default function ContactUs() {
   return (
-    <main className="flex flex-col gap-16 mt-28">
+    <main className="flex flex-col gap-16">
+      <HeroSection
+        title="تماس با ما"
+        mainText="در ارتباط باشید"
+        subText="ما مشتاق شنیدن صدای شما هستیم"
+        buttonTitle="درباره‌ی ما"
+        buttonIcon={<BsChatSquareText />}
+        buttonPosition="right"
+        buttonUrl="/about"
+      />
       <ContactInfo />
       <ContactForm />
       <ContactFAQ />

@@ -50,19 +50,20 @@ export const metadata: Metadata = {
 
 
 export default async function StoriesPage() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/stories/list/`, {
-    cache: 'no-store',
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/stories/list/`,
+    { cache: "no-store" }
+  );
   const stories: Story[] = await response.json();
 
   return (
     <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
       {/* Hero Section */}
       <HeroSection
-        title="استوری‌های فرهنگی صراط"
-        mainText="لحظاتی کوتاه، پیام‌هایی عمیق"
-        subText="در این بخش، استوری‌های الهام‌بخش گروه سرود صراط را مشاهده می‌کنید."
-        buttonTitle="مشاهده استوری‌ها"
+        title="استوری‌های گروه سرود صراط"
+        mainText="لحظات کوتاه، پژواکِ آواز و پیام"
+        subText="نماهایی کوتاه از اجراها، پشت‌صحنه و پیام‌هایی که با موسیقی روایت می‌شوند."
+        buttonTitle="دیدن استوری‌ها"
         buttonIcon={<FaInstalod />}
         buttonPosition="right"
         buttonUrl="/stories"
@@ -70,23 +71,21 @@ export default async function StoriesPage() {
       />
 
       {/* Intro Section */}
-      <section className="max-w-4xl mx-auto text-center space-y-6">
+      <section className="max-w-4xl mx-auto text-center space-y-6 px-4">
         <h2 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">
-          چرا استوری‌های صراط؟
+          چه چیزی استوری‌های ما را متمایز می‌کند
         </h2>
         <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
-          استوری‌های گروه صراط با هدف انتقال پیام‌های فرهنگی، مذهبی و اجتماعی در قالبی کوتاه و تأثیرگذار تولید شده‌اند. این محتواها مناسب برای اشتراک‌گذاری در شبکه‌های اجتماعی هستند و می‌توانند الهام‌بخش لحظات روزمره باشند.
+          استوری‌های گروه صراط ترکیبی از اجرا، روایت و حس جمعی‌اند. هر قطعه کوتاه با هدف خلق یک لحظه احساسی ساخته می‌شود تا هم پیام فرهنگی منتقل شود و هم تجربه شنیداری و بصری تقویت گردد.
         </p>
       </section>
 
       {/* Story Grid */}
-      <section className="mx-auto">
-        <h2 className="text-2xl font-bold text-center mb-8 text-main-text-light dark:text-main-text-dark">
-          مجموعه استوری‌ها
-        </h2>
-        <StorySection stories={stories} />
+      <section className="mx-auto w-full px-4">
+        <StorySection
+          stories={stories}
+        />
       </section>
-
     </main>
   );
 }

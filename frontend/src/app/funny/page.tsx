@@ -46,42 +46,38 @@ export const metadata = {
   },
 };
 
-
 export default async function FunnyListPage() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_API_URL}/funny/`, {
-    cache: 'no-store',
+    cache: "no-store",
   });
   const data: Funny[] = await res.json();
 
   return (
-    <main className="w-full min-h-screen bg-base-light dark:bg-base-dark pb-20">
+    <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
       {/* Hero Section */}
       <HeroSection
-        title="صفحه خنده‌دار صراط"
-        mainText="زندگی جدی هست... اما ما نه همیشه!"
-        subText="در اینجا لحظاتی از طنز، شوخی‌های روزمره و چیزهایی که فقط ایرانی‌ها درک می‌کنن رو جمع کردیم."
-        buttonTitle="ارسال شوخی"
+        title="خنده‌ها و طنزهای گروه صراط"
+        mainText="صدای خنده، لحظه‌های مشترک"
+        subText="گزیده‌ای از شوخی‌ها، میم‌ها و لحظات طنزآمیز که فضای جمع را سبک‌تر می‌کنند."
+        buttonTitle="شوخی ها"
         buttonIcon={<FaAngleLeft />}
         buttonPosition="right"
-        buttonUrl="/submit-funny"
-        buttonClasses="bg-success-light dark:bg-success-dark"
+        buttonUrl="/funny"
+        buttonClasses=""
       />
 
       {/* Intro Section */}
-      <section className="max-w-4xl mx-auto text-center px-4 mt-12 space-y-6">
+      <section className="max-w-4xl mx-auto text-center space-y-6 px-4">
         <h2 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">
-          چرا شوخی‌های صراط؟
+          چرا بخش طنز صراط را دنبال کنید
         </h2>
         <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
-          شوخی‌های روزمره بخش جدایی‌ناپذیر فرهنگ ایرانی هستن. از خاطرات مدرسه تا لحظات خنده‌دار خانوادگی، این صفحه جاییه برای ثبت و اشتراک‌گذاری لحظاتی که لبخند به لب میارن. ما باور داریم که طنز می‌تونه دل‌ها رو به هم نزدیک‌تر کنه.
+          طنز جمعی بخشی از فرهنگ روزمره ماست. در این قسمت لحظات خنده‌دارِ اجراها، پشت‌صحنه‌ها و خاطرات گروه را جمع‌آوری می‌کنیم تا لبخند و همدلی را بین اعضا و مخاطبان گسترده‌تر کنیم.
         </p>
       </section>
 
       {/* Funny List */}
       <section className="md:mx-10 px-4 mt-16">
-        <h2 className="text-2xl font-bold text-main-text-light dark:text-main-text-dark mb-8 text-center">
-          لیست لحظات خنده‌دار
-        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {data.map((item, i) => (
