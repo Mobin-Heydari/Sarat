@@ -16,7 +16,6 @@ type Banner = { image: string };
 type Props = {
   banners: Banner[];
   className?: string;
-  overlay?: boolean;
   autoplay?: boolean;
   delayMs?: number;
   fit?: "cover" | "contain";
@@ -26,7 +25,6 @@ type Props = {
 export function BannerSlider({
   banners,
   className,
-  overlay = true,
   autoplay = true,
   delayMs = 4000,
   fit = "cover",
@@ -69,7 +67,6 @@ export function BannerSlider({
       aria-roledescription="carousel"
       aria-label="Banner slider"
     >
-      {overlay && <div className="pointer-events-none absolute inset-0 bg-black/35 z-10" />}
 
       <Swiper
         modules={[Navigation, Autoplay, Keyboard, Pagination, A11y]}
