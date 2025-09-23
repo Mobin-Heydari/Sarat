@@ -91,16 +91,6 @@ const HeroSection = ({
             </Link>
           </motion.div>
         )}
-
-        {/* Emotional Hook */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.6 }}
-          className="text-xs text-main-text-light dark:text-main-text-dark max-w-md leading-relaxed"
-        >
-          گروه صراط فقط یک مجموعه هنری نیست — ما بستری هستیم برای رشد، همدلی و بیان ارزش‌های فرهنگی نسل جدید. هر اجرا، هر نماهنگ، و هر همکاری، قدمی‌ست به سوی آینده‌ای روشن‌تر.
-        </motion.p>
       </div>
 
       {/* Scroll Cue */}
