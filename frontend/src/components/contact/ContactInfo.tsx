@@ -8,7 +8,7 @@ const contactDetails = [
     icon: <FaPhoneAlt size={24} />,
     label: 'شماره تماس',
     value: '09027371188',
-    description: 'پاسخ‌گویی از ساعت ۹ تا ۱۸',
+    description: 'پاسخ گوی شما هستیم.',
   },
   {
     icon: <FaEnvelope size={24} />,
