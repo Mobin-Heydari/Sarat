@@ -90,7 +90,7 @@ export function Footer() {
             درباره ما:
           </h4>
           <p className="text-center my-5 text-lg bg-clip-text text-transparent bg-gradient-to-r py-4 from-primary-light via-success-light to-selected-light dark:from-primary-dark dark:via-success-dark dark:to-selected-dark font-semibold">
-            گروه سرود صراط یکی از برترین گروه های سرود کشور می باشد وآمادهاجرادر مرسمات مختلف است.
+            گروه سرود صراط یکی از برترین گروه های سرود کشور می باشد و آماده اجرا در مرسمات مختلف است.
           </p>
           <a
             href="tel:09027371188"
