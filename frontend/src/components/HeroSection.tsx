@@ -26,7 +26,7 @@ const HeroSection = ({
   buttonClasses?: string;
 }) => {
   return (
-    <section className="relative w-full min-h-[60vh] flex items-center justify-center overflow-hidden bg-base-light dark:bg-base-dark">
+    <section className="relative w-full min-h-[40vh] flex items-center justify-center overflow-hidden bg-base-light dark:bg-base-dark">
       {/* Ambient Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 w-96 h-96 bg-primary-light/10 dark:bg-primary-dark/10 blur-3xl rounded-full animate-pulse -translate-x-1/2" />
@@ -41,7 +41,7 @@ const HeroSection = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="uppercase tracking-widest text-xs text-main-text-light dark:text-main-text-dark mb-4"
+            className="uppercase tracking-widest text-lg text-main-text-light dark:text-main-text-dark mb-4"
           >
             {title}
           </motion.p>
@@ -56,7 +56,7 @@ const HeroSection = ({
           >
             <TextGenerateEffect
               words={mainText}
-              className="text-[42px] md:text-5xl lg:text-6xl font-bold leading-tight text-center"
+              className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-center"
             />
           </motion.div>
         )}
@@ -92,19 +92,6 @@ const HeroSection = ({
           </motion.div>
         )}
       </div>
-
-      {/* Scroll Cue */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10"
-      >
-        <div className="animate-bounce text-xs text-main-text-light dark:text-main-text-dark">
-          اسکرول کنید برای ادامه ↓
-        </div>
-      </motion.div>
     </section>
   );
 };
