@@ -61,8 +61,8 @@ export default async function StoriesPage() {
       {/* Hero Section */}
       <HeroSection
         title="استوری‌های گروه سرود صراط"
-        mainText="لحظات کوتاه، پژواکِ آواز و پیام"
-        subText="نماهایی کوتاه از اجراها، پشت‌صحنه و پیام‌هایی که با موسیقی روایت می‌شوند."
+        mainText="بخش استوری های گروه"
+        subText=" نما های کوتاه از اجرا، ریلز ها و پشت صحنه"
         buttonTitle="دیدن استوری‌ها"
         buttonIcon={<FaInstalod />}
         buttonPosition="right"

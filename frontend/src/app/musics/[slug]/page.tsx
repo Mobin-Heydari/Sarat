@@ -89,7 +89,7 @@ export default async function MusicDetailPage({ params }: PageProps) {
         buttonTitle="بازگشت به صوت‌ها"
         buttonIcon={<CiMusicNote1 />}
         buttonPosition="right"
-        buttonUrl="/audios"
+        buttonUrl="/musics"
         buttonClasses="bg-primary-light dark:bg-primary-dark"
       />
 

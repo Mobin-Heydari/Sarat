@@ -65,7 +65,7 @@ export default function AboutUs() {
         buttonTitle="تماس با ما"
         buttonIcon={<BsPeople />}
         buttonPosition="right"
-        buttonUrl="/contact"
+        buttonUrl="/contact-us"
       />
 
       <AboutValues />

@@ -49,8 +49,8 @@ export default async function ClipartsPage() {
       {/* Hero */}
       <HeroSection
         title="نماهنگ‌های گروه سرود صراط"
-        mainText="تصویر و صدا در خدمت پیام"
-        subText="نماهنگ‌هایی که روایتگر ارزش‌های فرهنگی و معنوی‌اند؛ اجراها، روایت‌های تصویری و جلوه‌های هنری گروه را اینجا ببینید."
+        mainText="بخش نماهنگ ها "
+        subText="روایت های تصویری، جلوه های هنری"
         buttonTitle="مشاهده نماهنگ‌ها"
         buttonIcon={<BsCollectionPlay />}
         buttonPosition="right"

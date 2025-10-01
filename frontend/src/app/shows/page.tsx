@@ -58,20 +58,19 @@ export default async function ShowsListPage() {
     <main className="w-full min-h-screen bg-base-light dark:bg-base-dark pb-20 mt-10">
       {/* Hero Section */}
       <HeroSection
-        title="فهرست اجراهای گروه سرود صراط"
+        title="اجراهای گروه سرود صراط"
         mainText="هر اجرا یک روایت، هر لحظه یک یادگار"
-        subText="مرور اجراهای زنده، پروژه‌های صحنه‌ای و لحظات برجسته گروه. اگر اجرا یا پیشنهادی دارید، آن را ثبت کنید تا با جامعه‌مان به اشتراک بگذاریم."
-        buttonTitle="ثبت اجرای جدید"
+        subText="گلچین اجرا ها در رویداد ها و مراسمات "
+        buttonTitle="اجرا ها"
         buttonIcon={<FaAngleLeft />}
         buttonPosition="right"
-        buttonUrl="/submit-show"
-        buttonClasses="bg-primary-light dark:bg-primary-dark"
+        buttonUrl="/shows"
       />
 
       {/* Intro Section */}
       <section className="max-w-4xl mx-auto text-center px-4 mt-12 space-y-6">
         <h2 className="text-3xl font-bold text-main-text-light dark:text-main-text-dark">
-          چه چیزی اجراهای ما را خاص می‌کند
+          اجرای گروه سرود صراط را در این صفحه دنبال کنید :
         </h2>
         <p className="text-lg text-main-text-light dark:text-main-text-dark leading-relaxed">
           اجراهای صراط پیوندی‌اند میان موسیقی، روایت و تجربه جمعی. از اجراهای کوچک تمرینی تا برنامه‌های صحنه‌ای بزرگ، هر اجرا فرصتی است برای انتقال پیام، برانگیختن احساس و ساختن خاطره‌ای مشترک.

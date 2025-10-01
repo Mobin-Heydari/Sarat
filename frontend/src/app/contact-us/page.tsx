@@ -83,7 +83,7 @@ export default function ContactUs() {
         buttonTitle="درباره‌ی ما"
         buttonIcon={<BsChatSquareText />}
         buttonPosition="right"
-        buttonUrl="/about"
+        buttonUrl="/about-us"
       />
       <ContactInfo />
       <ContactForm />

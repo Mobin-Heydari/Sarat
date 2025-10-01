@@ -60,8 +60,8 @@ export default async function Musics() {
       {/* Hero Section */}
       <HeroSection
         title="صوت‌ها و سرودهای گروه صراط"
-        mainText="آوای جمع، پیامِ همدلانه"
-        subText="مجموعه‌ای از قطعات شنیداری؛ از سرودهای جمعی تا نماهای صوتی کوتاه که پیام فرهنگی و معنوی را منتقل می‌کنند."
+        mainText="بخش آثار صوتی"
+        subText="مجموع سرود های تولید شده"
         buttonTitle="گوش دادن به آثار"
         buttonIcon={<CiMusicNote1 />}
         buttonPosition="right"

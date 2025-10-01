@@ -56,10 +56,10 @@ export default async function FunnyListPage() {
     <main className="flex flex-col gap-20 w-full bg-base-light dark:bg-base-dark">
       {/* Hero Section */}
       <HeroSection
-        title="خنده‌ها و طنزهای گروه صراط"
-        mainText="صدای خنده، لحظه‌های مشترک"
-        subText="گزیده‌ای از شوخی‌ها، میم‌ها و لحظات طنزآمیز که فضای جمع را سبک‌تر می‌کنند."
-        buttonTitle="شوخی ها"
+        title="با مزه ها"
+        mainText="بخش با مزه ها"
+        subText="پشت صحنه ضبط ها، و خاطرات طنز گروه"
+        buttonTitle="با مزه ها"
         buttonIcon={<FaAngleLeft />}
         buttonPosition="right"
         buttonUrl="/funny"

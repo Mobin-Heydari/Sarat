@@ -61,8 +61,8 @@ export default function Home() {
       {/* Hero Section */}
       <HeroSection
         title="گروه سرود صراط"
-        mainText="هنر، ایمان، همدلی"
-        subText="در این صفحه، مجموعه‌ای از آثار فرهنگی، صوت‌های مذهبی، لحظات طنز و راه‌های ارتباط با ما را خواهید یافت."
+        mainText="صفحه اصلی"
+        subText="جدیدترین آثار ، تولیدات و نماهنگ ها"
         buttonTitle="مشاهده نماهنگ‌ها"
         buttonIcon={<BsCollectionPlay />}
         buttonPosition="right"
