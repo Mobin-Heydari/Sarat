@@ -26,7 +26,7 @@ const HeroSection = ({
   buttonClasses?: string;
 }) => {
   return (
-    <section className="relative w-full min-h-[40vh] flex items-center justify-center overflow-hidden bg-base-light dark:bg-base-dark">
+    <section className="relative w-full min-h-[55vh] flex items-center justify-center overflow-hidden bg-base-light dark:bg-base-dark">
       {/* Ambient Glow */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 w-96 h-96 bg-primary-light/10 dark:bg-primary-dark/10 blur-3xl rounded-full animate-pulse -translate-x-1/2" />
