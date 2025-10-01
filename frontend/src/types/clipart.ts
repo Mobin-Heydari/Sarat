@@ -6,7 +6,6 @@ export interface Clipart {
 
     poster: string;
     video: string;
-    music: string;
 
     text: string;
 

@@ -10,7 +10,6 @@ class Clipart(models.Model):
 
     poster = models.ImageField(verbose_name="پوستر", upload_to="cliparts/posters/")
     video = models.URLField(verbose_name="آدرس ویدیو")
-    music = models.FileField(verbose_name="صوت", upload_to="cliparts/musics/")
 
     text = RichTextField(verbose_name="متن نماهنگ")
 

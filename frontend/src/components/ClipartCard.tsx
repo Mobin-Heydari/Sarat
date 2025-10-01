@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { CardBody, CardContainer, CardItem } from '@/components/ui/3DCards';
 import { Clipart } from '@/types/clipart';
-import { CalendarDays, Eye, Music2 } from 'lucide-react';
+import { CalendarDays, Eye } from 'lucide-react';
 
 export default function ClipartCard(item: Clipart) {
   const router = useRouter();
@@ -55,17 +55,6 @@ export default function ClipartCard(item: Clipart) {
             <span>{item.views} بازدید</span>
           </div>
         </CardItem>
-
-        {/* Music Indicator */}
-        {item.music && (
-          <CardItem
-            translateZ={30}
-            className="mt-2 flex items-center gap-2 text-sm text-success-text-light dark:text-success-text-dark"
-          >
-            <Music2 size={16} />
-            <span>موزیک همراه دارد</span>
-          </CardItem>
-        )}
 
         {/* CTA Button */}
         <div className="flex justify-end mt-6">

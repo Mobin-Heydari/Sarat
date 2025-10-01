@@ -23,7 +23,6 @@ class ClipartAdmin(admin.ModelAdmin):
         "views",
         "poster_preview",
         "video_link",
-        "music_link",
         "created_at_jalali",
         "updated_at_jalali",
     )
@@ -32,7 +31,6 @@ class ClipartAdmin(admin.ModelAdmin):
     readonly_fields = (
         "poster_preview",
         "video_link",
-        "music_link",
         "created_at_jalali",
         "updated_at_jalali",
     )
@@ -54,13 +52,6 @@ class ClipartAdmin(admin.ModelAdmin):
             return format_html('<a href="{}" target="_blank">مشاهده ویدیو</a>', obj.video)
         return "—"
     video_link.short_description = "ویدیو"
-
-    def music_link(self, obj):
-        """Clickable link to the audio file."""
-        if obj.music:
-            return format_html('<a href="{}" target="_blank">دانلود/پخش صوت</a>', obj.music.url)
-        return "—"
-    music_link.short_description = "فایل صوت"
 
     def created_at_jalali(self, obj):
         return to_jalali(obj.created_at)

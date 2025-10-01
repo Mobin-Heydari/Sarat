@@ -13,7 +13,7 @@ class ClipartViewSet(ViewSet):
     lookup_field = 'slug'
 
     def list(self, request, *args, **kwargs):
-        instance = Clipart.objects.order_by('-views')
+        instance = Clipart.objects.order_by('-created_at')
         serializer = ClipartSerializer(instance, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     

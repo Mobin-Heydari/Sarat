@@ -33,7 +33,6 @@ class ClipartSerializer(serializers.ModelSerializer):
             "description",
             "poster",
             "video",
-            "music",
             "text",
             "views",
             "created_at_jalali",
