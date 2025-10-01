@@ -182,13 +182,13 @@ export function ContactForm() {
           >
             <LabelInputContainer>
               <Label htmlFor="f_name">نام</Label>
-              <Input id="f_name" name="f_name" placeholder="مبین" type="text" />
+              <Input id="f_name" name="f_name" placeholder="نام" type="text" />
               {fieldErrors.f_name && <p className="text-red-500 text-xs mt-1">{fieldErrors.f_name}</p>}
             </LabelInputContainer>
 
             <LabelInputContainer>
               <Label htmlFor="l_name">نام خانوادگی</Label>
-              <Input id="l_name" name="l_name" placeholder="حیدری" type="text" />
+              <Input id="l_name" name="l_name" placeholder="نام خانوادگی" type="text" />
               {fieldErrors.l_name && <p className="text-red-500 text-xs mt-1">{fieldErrors.l_name}</p>}
             </LabelInputContainer>
           </motion.div>
@@ -206,7 +206,7 @@ export function ContactForm() {
           >
             <LabelInputContainer>
               <Label htmlFor="phone">شماره تلفن</Label>
-              <Input id="phone" name="phone" placeholder="0910-207-2859" type="tel" />
+              <Input id="phone" name="phone" placeholder="شماره تماس" type="tel" />
               {fieldErrors.phone && <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>}
             </LabelInputContainer>
 
