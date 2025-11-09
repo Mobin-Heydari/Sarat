@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Music } from '@/types/music';
 
 export default function MusicHeroBanner({ data }: { data: Music }) {
+  console.log(`${process.env.NEXT_PUBLIC_MEDIA_URL}${data.poster}`)
   return (
     <div className="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-xl">
       {/* Background Poster */}
